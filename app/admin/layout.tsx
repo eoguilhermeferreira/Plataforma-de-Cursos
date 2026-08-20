@@ -32,6 +32,9 @@ export default async function AdminLayout({
         <div className="mx-auto flex max-w-4xl items-center justify-between">
           <span className="text-base font-semibold text-gray-900">Admin</span>
           <nav className="flex gap-4 text-sm">
+            <Link href="/admin/cursos" className="text-gray-600 hover:text-gray-900">
+              Cursos
+            </Link>
             <Link href="/admin/alunos" className="text-gray-600 hover:text-gray-900">
               Alunos
             </Link>

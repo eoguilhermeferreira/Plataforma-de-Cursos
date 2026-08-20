@@ -1,0 +1,142 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+export function CriarCursoModal() {
+  const router = useRouter();
+  const [aberto, setAberto] = useState(false);
+  const [titulo, setTitulo] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [publico, setPublico] = useState<"interno" | "externo">("interno");
+  const [carregando, setCarregando] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
+
+  function fechar() {
+    setAberto(false);
+    setTitulo("");
+    setDescricao("");
+    setPublico("interno");
+    setErro(null);
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setCarregando(true);
+    setErro(null);
+    try {
+      const res = await fetch("/api/admin/cursos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ titulo, descricao, publico }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErro(data.error ?? "Não foi possível criar o curso.");
+        return;
+      }
+      fechar();
+      router.push(`/admin/cursos/${data.id}`);
+      router.refresh();
+    } catch {
+      setErro("Não foi possível criar o curso.");
+    } finally {
+      setCarregando(false);
+    }
+  }
+
+  return (
+    <>
+      <button
+        onClick={() => setAberto(true)}
+        className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white"
+      >
+        Criar curso
+      </button>
+
+      {aberto && (
+        <div className="fixed inset-0 z-20 flex items-end justify-center bg-black/40 sm:items-center">
+          <div className="w-full max-w-sm rounded-t-xl bg-white p-6 sm:rounded-xl">
+            <h2 className="text-lg font-semibold text-gray-900">Criar curso</h2>
+
+            <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+              <div>
+                <label
+                  htmlFor="titulo-curso"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  Título
+                </label>
+                <input
+                  id="titulo-curso"
+                  type="text"
+                  value={titulo}
+                  onChange={(e) => setTitulo(e.target.value)}
+                  required
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="descricao-curso"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  Descrição
+                </label>
+                <textarea
+                  id="descricao-curso"
+                  value={descricao}
+                  onChange={(e) => setDescricao(e.target.value)}
+                  rows={3}
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <span className="mb-1 block text-sm font-medium text-gray-700">
+                  Público
+                </span>
+                <div className="flex gap-2">
+                  {(["interno", "externo"] as const).map((opcao) => (
+                    <button
+                      key={opcao}
+                      type="button"
+                      onClick={() => setPublico(opcao)}
+                      className={`flex-1 rounded-lg border px-4 py-3 text-sm font-medium ${
+                        publico === opcao
+                          ? "border-gray-900 bg-gray-900 text-white"
+                          : "border-gray-300 text-gray-700"
+                      }`}
+                    >
+                      {opcao === "interno" ? "Interno" : "Externo"}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {erro && <p className="text-sm text-red-600">{erro}</p>}
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={fechar}
+                  className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-sm font-medium text-gray-700"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={carregando}
+                  className="flex-1 rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
+                >
+                  {carregando ? "Criando..." : "Criar"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

@@ -1,0 +1,155 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+type Curso = {
+  id: string;
+  titulo: string;
+  descricao: string | null;
+  publico: string;
+  publicado: boolean;
+};
+
+export function EditarCursoForm({ curso }: { curso: Curso }) {
+  const router = useRouter();
+  const [titulo, setTitulo] = useState(curso.titulo);
+  const [descricao, setDescricao] = useState(curso.descricao ?? "");
+  const [publico, setPublico] = useState<"interno" | "externo">(
+    curso.publico === "externo" ? "externo" : "interno",
+  );
+  const [salvando, setSalvando] = useState(false);
+  const [publicando, setPublicando] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
+
+  async function salvar(updates: Record<string, unknown>) {
+    setErro(null);
+    const res = await fetch(`/api/admin/cursos/${curso.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      setErro(data.error ?? "Não foi possível salvar.");
+      return false;
+    }
+    router.refresh();
+    return true;
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSalvando(true);
+    try {
+      await salvar({ titulo, descricao, publico });
+    } finally {
+      setSalvando(false);
+    }
+  }
+
+  async function togglePublicado() {
+    setPublicando(true);
+    try {
+      await salvar({ publicado: !curso.publicado });
+    } finally {
+      setPublicando(false);
+    }
+  }
+
+  return (
+    <section className="rounded-lg border border-gray-200 bg-white p-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-base font-semibold text-gray-900">Dados do curso</h2>
+        <span
+          className={`rounded-full px-2 py-1 text-xs font-medium ${
+            curso.publicado
+              ? "bg-green-100 text-green-800"
+              : "bg-yellow-100 text-yellow-800"
+          }`}
+        >
+          {curso.publicado ? "Publicado" : "Rascunho"}
+        </span>
+      </div>
+
+      <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+        <div>
+          <label
+            htmlFor="titulo-edicao"
+            className="mb-1 block text-sm font-medium text-gray-700"
+          >
+            Título
+          </label>
+          <input
+            id="titulo-edicao"
+            type="text"
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+            required
+            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="descricao-edicao"
+            className="mb-1 block text-sm font-medium text-gray-700"
+          >
+            Descrição
+          </label>
+          <textarea
+            id="descricao-edicao"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+            rows={3}
+            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <span className="mb-1 block text-sm font-medium text-gray-700">Público</span>
+          <div className="flex gap-2">
+            {(["interno", "externo"] as const).map((opcao) => (
+              <button
+                key={opcao}
+                type="button"
+                onClick={() => setPublico(opcao)}
+                className={`flex-1 rounded-lg border px-4 py-3 text-sm font-medium ${
+                  publico === opcao
+                    ? "border-gray-900 bg-gray-900 text-white"
+                    : "border-gray-300 text-gray-700"
+                }`}
+              >
+                {opcao === "interno" ? "Interno" : "Externo"}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {erro && <p className="text-sm text-red-600">{erro}</p>}
+
+        <div className="flex gap-2">
+          <button
+            type="submit"
+            disabled={salvando}
+            className="flex-1 rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
+          >
+            {salvando ? "Salvando..." : "Salvar"}
+          </button>
+          <button
+            type="button"
+            onClick={togglePublicado}
+            disabled={publicando}
+            className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-sm font-medium text-gray-700 disabled:opacity-50"
+          >
+            {publicando
+              ? "Aguarde..."
+              : curso.publicado
+                ? "Despublicar"
+                : "Publicar"}
+          </button>
+        </div>
+      </form>
+    </section>
+  );
+}
