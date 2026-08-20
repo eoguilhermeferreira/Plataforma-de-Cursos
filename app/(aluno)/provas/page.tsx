@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getCursosComProgresso } from "@/lib/progresso";
@@ -51,13 +52,22 @@ export default async function ProvasPage() {
                   </span>
                 </div>
 
-                <button
-                  type="button"
-                  disabled
-                  className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm font-medium text-gray-400"
-                >
-                  {liberada ? "Prova em breve" : "Prova bloqueada"}
-                </button>
+                {liberada ? (
+                  <Link
+                    href={`/provas/${curso.id}`}
+                    className="mt-4 block w-full rounded-lg bg-gray-900 px-4 py-3 text-center text-sm font-medium text-white"
+                  >
+                    Ver prova
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    disabled
+                    className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm font-medium text-gray-400"
+                  >
+                    Prova bloqueada
+                  </button>
+                )}
               </li>
             );
           })}

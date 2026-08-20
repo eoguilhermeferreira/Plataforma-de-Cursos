@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { avaliarProva, temAvisoBloqueante } from "@/lib/prova-revisao";
 import type { TipoQuestao } from "@/lib/prova-parser";
@@ -242,6 +243,15 @@ export function RevisaoProva({
           {STATUS_LABEL[prova.exam.status] ?? prova.exam.status}
         </span>
       </div>
+
+      {(prova.exam.status === "publicada" || prova.exam.status === "substituida") && (
+        <Link
+          href={`/admin/provas/${prova.exam.id}/resultados`}
+          className="block rounded-lg border border-gray-300 px-4 py-3 text-center text-sm font-medium text-gray-700"
+        >
+          Ver resultados
+        </Link>
+      )}
 
       {!editavel && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
