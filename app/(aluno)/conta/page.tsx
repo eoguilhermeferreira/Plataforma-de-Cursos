@@ -14,7 +14,7 @@ export default async function ContaPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("nome, papel")
+    .select("nome")
     .eq("id", user.id)
     .single();
 
@@ -32,15 +32,6 @@ export default async function ContaPage() {
           <p className="text-sm text-gray-500">Nome</p>
           <p className="text-base text-gray-900">{profile.nome}</p>
         </div>
-      )}
-
-      {profile?.papel === "admin" && (
-        <a
-          href="/admin"
-          className="mt-4 block rounded-lg border border-gray-300 px-4 py-3 text-center text-base font-medium text-gray-900"
-        >
-          Ir para o painel admin
-        </a>
       )}
 
       <div className="mt-6">
