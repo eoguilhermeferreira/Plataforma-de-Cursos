@@ -1,5 +1,6 @@
 import { getAlunosList } from "@/lib/admin-users";
 import { ConvidarAlunoModal } from "@/components/admin/convidar-aluno-modal";
+import { CriarContaModal } from "@/components/admin/criar-conta-modal";
 import { ReenviarConviteButton } from "@/components/admin/reenviar-convite-button";
 import { AlterarEmailButton } from "@/components/admin/alterar-email-button";
 
@@ -24,7 +25,10 @@ export default async function AlunosPage() {
         <h1 className="font-display text-xl font-semibold text-[var(--color-ink)]">
           Alunos
         </h1>
-        <ConvidarAlunoModal />
+        <div className="flex gap-2">
+          <CriarContaModal />
+          <ConvidarAlunoModal />
+        </div>
       </div>
 
       <div className="mt-6 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white">
