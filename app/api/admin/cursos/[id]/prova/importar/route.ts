@@ -41,7 +41,7 @@ export async function POST(
   const supabase = await createClient();
   const { data: curso } = await supabase
     .from("courses")
-    .select("id, titulo, publico")
+    .select("id, titulo")
     .eq("id", courseId)
     .maybeSingle();
 
@@ -69,7 +69,7 @@ export async function POST(
       titulo: `Prova — ${curso.titulo}`,
       versao: proximaVersao,
       status: "rascunho",
-      mostrar_gabarito: curso.publico === "interno",
+      mostrar_gabarito: true,
     })
     .select("id")
     .single();

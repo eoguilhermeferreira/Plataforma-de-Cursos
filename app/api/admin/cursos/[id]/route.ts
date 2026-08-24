@@ -24,9 +24,6 @@ export async function PATCH(
   if (typeof body?.descricao === "string") {
     updates.descricao = body.descricao.trim() || null;
   }
-  if (body?.publico === "interno" || body?.publico === "externo") {
-    updates.publico = body.publico;
-  }
   if (typeof body?.publicado === "boolean") {
     updates.publicado = body.publicado;
   }

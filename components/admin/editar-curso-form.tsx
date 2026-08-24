@@ -7,7 +7,6 @@ type Curso = {
   id: string;
   titulo: string;
   descricao: string | null;
-  publico: string;
   publicado: boolean;
 };
 
@@ -15,9 +14,6 @@ export function EditarCursoForm({ curso }: { curso: Curso }) {
   const router = useRouter();
   const [titulo, setTitulo] = useState(curso.titulo);
   const [descricao, setDescricao] = useState(curso.descricao ?? "");
-  const [publico, setPublico] = useState<"interno" | "externo">(
-    curso.publico === "externo" ? "externo" : "interno",
-  );
   const [salvando, setSalvando] = useState(false);
   const [publicando, setPublicando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
@@ -42,7 +38,7 @@ export function EditarCursoForm({ curso }: { curso: Curso }) {
     e.preventDefault();
     setSalvando(true);
     try {
-      await salvar({ titulo, descricao, publico });
+      await salvar({ titulo, descricao });
     } finally {
       setSalvando(false);
     }
@@ -104,26 +100,6 @@ export function EditarCursoForm({ curso }: { curso: Curso }) {
             rows={3}
             className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
           />
-        </div>
-
-        <div>
-          <span className="mb-1 block text-sm font-medium text-[var(--color-ink)]">Público</span>
-          <div className="flex gap-2">
-            {(["interno", "externo"] as const).map((opcao) => (
-              <button
-                key={opcao}
-                type="button"
-                onClick={() => setPublico(opcao)}
-                className={`flex-1 rounded-lg border px-4 py-3 text-sm font-medium ${
-                  publico === opcao
-                    ? "border-[var(--color-royal)] bg-[var(--color-royal)] text-white"
-                    : "border-[var(--color-line)] text-[var(--color-ink)]"
-                }`}
-              >
-                {opcao === "interno" ? "Interno" : "Externo"}
-              </button>
-            ))}
-          </div>
         </div>
 
         {erro && <p className="text-sm text-red-600">{erro}</p>}

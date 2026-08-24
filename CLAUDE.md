@@ -11,13 +11,13 @@ automaticamente por gabarito. As discursivas vão para uma fila, onde um avaliad
 humano dá nota e escreve o comentário. O aluno vê o resultado em "Minhas Provas".
 O primeiro conteúdo é treinamento para equipe de corretores de imóveis
 (financiamento habitacional / imóvel na planta). Mais materiais virão depois.
-### Dois públicos, cursos separados
-- **Interno:** equipe do corretor. Acesso criado por convite manual do admin.
-- **Externo (futuro):** corretores de fora, que compram. Acesso criado por
-  webhook de pagamento.
-O mesmo material NÃO deve ser publicado nos dois. São cursos distintos, com
-matrícula distinta. O sistema não impede isso — é decisão editorial —, mas o
-modelo de dados já separa.
+### Acesso aos cursos (decisão revista em 2026-08-24)
+Não existe mais separação de público (interno/externo) nem matrícula manual
+por curso. Todo curso **publicado** aparece automaticamente para **qualquer
+aluno com conta ativa**, sem o admin precisar liberar curso a curso. A conta
+em si continua sendo criada só pelo sistema (convite do admin ou, na Fase 6,
+webhook de pagamento) — o que mudou foi o que a conta enxerga depois de
+existir: tudo que estiver publicado, não um subconjunto escolhido a dedo.
 ---
 ## 2. Vocabulário (importante)
 "Corretor" é ambíguo neste projeto: significa tanto o corretor de imóveis
@@ -84,11 +84,10 @@ Regras de stack:
 17. Admin pode **liberar nova tentativa** para um aluno específico, com motivo
     registrado. É a única saída para quem reprovou.
 18. `nota_minima` padrão **60%**.
-19. `mostrar_gabarito` é configuração **por prova**:
+19. `mostrar_gabarito` é configuração **por prova**, padrão ligado:
     - ligado: aluno vê nota, quais errou e a alternativa correta;
     - desligado: aluno vê nota e quais errou, com link para a aula, mas **não**
       a resposta certa.
-    Padrão: ligado em curso `interno`, desligado em curso `externo`.
 20. Objetivas e V/F: corrigidas na hora do envio.
     Discursivas: nota e comentário manuais.
 21. Enquanto houver discursiva pendente, o status é `aguardando_correcao` e o
@@ -129,12 +128,13 @@ final é risco real. Portanto:
 ## 7. Modelo de dados
 ```
 profiles          id(=auth.users), nome, cpf, telefone, papel, ativo, criado_em
-courses           id, titulo, descricao, capa_path, publico(interno|externo),
-                  publicado, criado_em
+courses           id, titulo, descricao, capa_path, publicado, criado_em
 lessons           id, course_id, titulo, ordem, pdf_path, versao,
                   tempo_minimo_segundos, publicado, atualizado_em
 enrollments       id, user_id, course_id, origem(convite|compra), status(ativa|revogada),
                   criado_em, revogado_em, motivo_revogacao
+                  (tabela mantida, mas não controla mais visibilidade de curso —
+                  ver "Acesso aos cursos" na seção 1; reservada para a Fase 6)
 lesson_progress   id, user_id, lesson_id, segundos_lidos, concluido_em, versao_lida
 invites           id, email, token_hash, course_ids[], expira_em, usado_em,
                   criado_por, criado_em

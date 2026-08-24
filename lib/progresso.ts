@@ -4,38 +4,26 @@ export type CursoComProgresso = {
   id: string;
   titulo: string;
   descricao: string | null;
-  publico: string;
   totalAulas: number;
   aulasConcluidas: number;
 };
 
 /**
- * Cursos em que o usuário tem matrícula ativa, com contagem de aulas
- * publicadas e quantas ele já concluiu. RLS já garante que só voltam cursos
- * publicados com enrollment ativa (ou tudo, se for admin).
+ * Todo curso publicado, com contagem de aulas publicadas e quantas o aluno
+ * já concluiu. RLS já garante que só voltam cursos publicados pra aluno com
+ * conta ativa (ou tudo, se for admin) — não depende mais de matrícula.
  */
 export async function getCursosComProgresso(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   supabase: SupabaseClient<any>,
   userId: string,
 ): Promise<CursoComProgresso[]> {
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("course_id, courses(id, titulo, descricao, publico)")
-    .eq("user_id", userId)
-    .eq("status", "ativa");
+  const { data: cursos } = await supabase
+    .from("courses")
+    .select("id, titulo, descricao")
+    .eq("publicado", true);
 
-  type CourseRow = {
-    id: string;
-    titulo: string;
-    descricao: string | null;
-    publico: string;
-  };
-  const cursos = (enrollments ?? [])
-    .map((e) => e.courses as unknown as CourseRow | null)
-    .filter((c): c is CourseRow => c !== null);
-
-  if (cursos.length === 0) return [];
+  if (!cursos || cursos.length === 0) return [];
 
   const courseIds = cursos.map((c) => c.id);
 
@@ -74,7 +62,6 @@ export async function getCursosComProgresso(
     id: curso.id,
     titulo: curso.titulo,
     descricao: curso.descricao,
-    publico: curso.publico,
     totalAulas: totalPorCurso.get(curso.id) ?? 0,
     aulasConcluidas: concluidasPorCurso.get(curso.id) ?? 0,
   }));
@@ -92,7 +79,7 @@ export type AulaComStatus = {
 };
 
 export type CursoDetalhe = {
-  curso: { id: string; titulo: string; descricao: string | null; publico: string };
+  curso: { id: string; titulo: string; descricao: string | null };
   aulas: AulaComStatus[];
 };
 
@@ -108,7 +95,7 @@ export async function getCursoDetalhe(
 ): Promise<CursoDetalhe | null> {
   const { data: curso } = await supabase
     .from("courses")
-    .select("id, titulo, descricao, publico")
+    .select("id, titulo, descricao")
     .eq("id", courseId)
     .maybeSingle();
 

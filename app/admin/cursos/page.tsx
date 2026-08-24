@@ -2,11 +2,6 @@ import Link from "next/link";
 import { getCursosAdmin } from "@/lib/admin-cursos";
 import { CriarCursoModal } from "@/components/admin/criar-curso-modal";
 
-const PUBLICO_LABEL: Record<string, string> = {
-  interno: "Interno",
-  externo: "Externo",
-};
-
 export default async function AdminCursosPage() {
   const cursos = await getCursosAdmin();
 
@@ -38,9 +33,6 @@ export default async function AdminCursosPage() {
                   )}
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-[var(--color-royal-soft)] px-2 py-1 text-xs font-medium text-[var(--color-royal)]">
-                    {PUBLICO_LABEL[curso.publico] ?? curso.publico}
-                  </span>
                   <span
                     className={`rounded-full px-2 py-1 text-xs font-medium ${
                       curso.publicado

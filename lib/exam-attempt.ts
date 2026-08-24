@@ -30,7 +30,7 @@ export type ExamRowPublico = {
   mostrar_gabarito: boolean;
 };
 
-/** Prova publicada vigente do curso, do jeito que o RLS já entrega pro aluno matriculado. */
+/** Prova publicada vigente do curso, do jeito que o RLS já entrega pro aluno. */
 export async function getExamPublicadoDoCurso(
   courseId: string,
 ): Promise<ExamRowPublico | null> {

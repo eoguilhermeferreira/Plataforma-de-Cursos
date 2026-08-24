@@ -8,7 +8,6 @@ export function CriarCursoModal() {
   const [aberto, setAberto] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [publico, setPublico] = useState<"interno" | "externo">("interno");
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
 
@@ -16,7 +15,6 @@ export function CriarCursoModal() {
     setAberto(false);
     setTitulo("");
     setDescricao("");
-    setPublico("interno");
     setErro(null);
   }
 
@@ -28,7 +26,7 @@ export function CriarCursoModal() {
       const res = await fetch("/api/admin/cursos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ titulo, descricao, publico }),
+        body: JSON.stringify({ titulo, descricao }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -91,28 +89,6 @@ export function CriarCursoModal() {
                   rows={3}
                   className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
                 />
-              </div>
-
-              <div>
-                <span className="mb-1 block text-sm font-medium text-[var(--color-ink)]">
-                  Público
-                </span>
-                <div className="flex gap-2">
-                  {(["interno", "externo"] as const).map((opcao) => (
-                    <button
-                      key={opcao}
-                      type="button"
-                      onClick={() => setPublico(opcao)}
-                      className={`flex-1 rounded-lg border px-4 py-3 text-sm font-medium ${
-                        publico === opcao
-                          ? "border-[var(--color-royal)] bg-[var(--color-royal)] text-white"
-                          : "border-[var(--color-line)] text-[var(--color-ink)]"
-                      }`}
-                    >
-                      {opcao === "interno" ? "Interno" : "Externo"}
-                    </button>
-                  ))}
-                </div>
               </div>
 
               {erro && <p className="text-sm text-red-600">{erro}</p>}

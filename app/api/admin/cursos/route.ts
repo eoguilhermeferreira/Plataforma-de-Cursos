@@ -15,7 +15,6 @@ export async function POST(request: Request) {
   const titulo = typeof body?.titulo === "string" ? body.titulo.trim() : "";
   const descricao =
     typeof body?.descricao === "string" ? body.descricao.trim() || null : null;
-  const publico = body?.publico === "externo" ? "externo" : "interno";
 
   if (!titulo) {
     return NextResponse.json({ error: "Título é obrigatório." }, { status: 400 });
@@ -24,7 +23,7 @@ export async function POST(request: Request) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("courses")
-    .insert({ titulo, descricao, publico })
+    .insert({ titulo, descricao })
     .select("id")
     .single();
 

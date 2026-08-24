@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCursoAdmin } from "@/lib/admin-cursos";
-import { getAlunosList } from "@/lib/admin-users";
 import { getExamsDoCurso } from "@/lib/admin-provas";
 import { EditarCursoForm } from "@/components/admin/editar-curso-form";
 import { AulasEditor } from "@/components/admin/aulas-editor";
-import { MatricularAluno } from "@/components/admin/matricular-aluno";
 
 const STATUS_LABEL: Record<string, string> = {
   rascunho: "Rascunho",
@@ -25,11 +23,7 @@ export default async function AdminCursoDetalhePage({
     notFound();
   }
 
-  const { curso, aulas, matriculas } = dados;
-  const alunos = await getAlunosList();
-  const alunosComConta = alunos.filter(
-    (a): a is typeof a & { userId: string } => a.userId !== null,
-  );
+  const { curso, aulas } = dados;
   const exams = await getExamsDoCurso(curso.id);
   const examAtual = exams.find((e) => e.status === "rascunho") ?? exams[0];
 
@@ -37,11 +31,6 @@ export default async function AdminCursoDetalhePage({
     <div className="space-y-8">
       <EditarCursoForm curso={curso} />
       <AulasEditor cursoId={curso.id} aulasIniciais={aulas} />
-      <MatricularAluno
-        cursoId={curso.id}
-        alunos={alunosComConta}
-        matriculas={matriculas}
-      />
 
       <section className="rounded-lg border border-[var(--color-line)] bg-white p-4">
         <div className="flex items-center justify-between">
