@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { IconCursos, IconAlunos, IconLivro, IconSair } from "@/components/icons";
+import { IconCursos, IconAlunos, IconCorrecao, IconLivro, IconSair } from "@/components/icons";
 import { LogoutButton } from "@/components/logout-button";
 
 export default async function AdminLayout({
@@ -55,6 +55,13 @@ export default async function AdminLayout({
             >
               <IconAlunos className="h-4 w-4" />
               <span className="hidden sm:inline">Alunos</span>
+            </Link>
+            <Link
+              href="/admin/correcoes"
+              className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-[#B9C2F0] hover:bg-white/10 hover:text-white"
+            >
+              <IconCorrecao className="h-4 w-4" />
+              <span className="hidden sm:inline">Correções</span>
             </Link>
             <LogoutButton
               icon={<IconSair className="h-4 w-4" />}

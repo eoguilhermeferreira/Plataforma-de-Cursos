@@ -47,6 +47,54 @@ export async function getResultadosDaProva(examId: string): Promise<ResultadoLin
   }));
 }
 
+export type CorrecaoPendente = {
+  attemptId: string;
+  examId: string;
+  examTitulo: string;
+  cursoTitulo: string;
+  userId: string;
+  nome: string | null;
+  email: string;
+  enviadoEm: string;
+};
+
+export async function getCorrecoesPendentes(): Promise<CorrecaoPendente[]> {
+  const supabase = await createClient();
+  const { data: attempts } = await supabase
+    .from("exam_attempts")
+    .select("id, exam_id, user_id, enviado_em, exams(titulo, courses(titulo))")
+    .eq("status", "aguardando_correcao")
+    .order("enviado_em", { ascending: true });
+
+  if (!attempts || attempts.length === 0) return [];
+
+  const userIds = [...new Set(attempts.map((a) => a.user_id))];
+
+  const { data: profiles } = await supabase
+    .from("profiles")
+    .select("id, nome")
+    .in("id", userIds);
+  const nomePorId = new Map((profiles ?? []).map((p) => [p.id, p.nome]));
+
+  const admin = createServiceRoleClient();
+  const authUsers = await listAllAuthUsers(admin);
+  const emailPorId = new Map(authUsers.map((u) => [u.id, u.email ?? ""]));
+
+  return attempts.map((a) => {
+    const exam = a.exams as unknown as { titulo: string; courses: { titulo: string } | null } | null;
+    return {
+      attemptId: a.id,
+      examId: a.exam_id,
+      examTitulo: exam?.titulo ?? "",
+      cursoTitulo: exam?.courses?.titulo ?? "",
+      userId: a.user_id,
+      nome: nomePorId.get(a.user_id) ?? null,
+      email: emailPorId.get(a.user_id) ?? "",
+      enviadoEm: a.enviado_em as string,
+    };
+  });
+}
+
 export type EstatisticaQuestao = {
   questionId: string;
   ordem: number;
