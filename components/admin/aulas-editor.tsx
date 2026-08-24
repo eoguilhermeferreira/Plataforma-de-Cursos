@@ -86,6 +86,21 @@ export function AulasEditor({
     router.refresh();
   }
 
+  async function excluirAula(id: string, titulo: string) {
+    if (!window.confirm(`Excluir a aula "${titulo}"? Essa ação não pode ser desfeita.`)) {
+      return;
+    }
+    setErro(null);
+    const res = await fetch(`/api/admin/aulas/${id}`, { method: "DELETE" });
+    if (!res.ok) {
+      const data = await res.json().catch(() => null);
+      setErro(data?.error ?? "Não foi possível excluir a aula.");
+      return;
+    }
+    setAulas((atual) => atual.filter((a) => a.id !== id));
+    router.refresh();
+  }
+
   return (
     <section className="rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
       <h2 className="text-base font-semibold text-[var(--color-ink)]">Aulas</h2>
@@ -181,6 +196,14 @@ export function AulasEditor({
                       }}
                     />
                   </label>
+
+                  <button
+                    type="button"
+                    onClick={() => excluirAula(aula.id, aula.titulo)}
+                    className="rounded-lg border border-red-200 px-2 py-1 text-xs font-medium text-red-700 hover:bg-red-50"
+                  >
+                    Excluir
+                  </button>
                 </div>
               </div>
             </div>
