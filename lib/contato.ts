@@ -1,5 +1,10 @@
-// TODO: trocar pelo link real do grupo assim que o admin criar e enviar.
-export const WHATSAPP_COMUNIDADE_URL = "https://chat.whatsapp.com/";
+export const WHATSAPP_COMUNIDADE_URL =
+  "https://chat.whatsapp.com/BZo3jn9LWcH3POQTJxIpeG?s=hd&p=i&mlu=4";
+
+export const COMUNIDADE_NOME = "Comunidade da Plataforma";
+
+// Caminho no bucket público "capas" — some quando a foto do grupo for enviada.
+export const COMUNIDADE_FOTO_PATH = "comunidade/foto.jpg";
 
 export const CONTATOS_SUPORTE = [
   { nome: "Guilherme Ferreira", telefone: "5514988044153" },

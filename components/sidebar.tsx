@@ -6,14 +6,13 @@ import {
   IconPasta,
   IconProva,
   IconAnotacao,
-  IconComunidade,
   IconLivro,
   IconSair,
 } from "@/components/icons";
 import { LogoutButton } from "@/components/logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SuporteModal } from "@/components/aluno/suporte-modal";
-import { WHATSAPP_COMUNIDADE_URL } from "@/lib/contato";
+import { ComunidadeModal } from "@/components/aluno/comunidade-modal";
 
 const ITENS = [
   { href: "/", label: "Materiais", Icon: IconPasta },
@@ -61,15 +60,7 @@ export function Sidebar({
           })}
 
           <li>
-            <a
-              href={WHATSAPP_COMUNIDADE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={ITEM_CLASS_INATIVO}
-            >
-              <IconComunidade className="h-5 w-5 shrink-0" />
-              Comunidade
-            </a>
+            <ComunidadeModal className={`w-full ${ITEM_CLASS_INATIVO}`} />
           </li>
 
           <li>

@@ -3,8 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { LogoutButton } from "@/components/logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SuporteModal } from "@/components/aluno/suporte-modal";
-import { IconComunidade } from "@/components/icons";
-import { WHATSAPP_COMUNIDADE_URL } from "@/lib/contato";
+import { ComunidadeModal } from "@/components/aluno/comunidade-modal";
 
 export default async function ContaPage() {
   const supabase = await createClient();
@@ -46,15 +45,7 @@ export default async function ContaPage() {
           <ThemeToggle className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--color-line)] text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]" />
         </div>
 
-        <a
-          href={WHATSAPP_COMUNIDADE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]"
-        >
-          <IconComunidade className="h-5 w-5" />
-          Comunidade no WhatsApp
-        </a>
+        <ComunidadeModal className="flex w-full items-center gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]" />
 
         <SuporteModal className="flex w-full items-center gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]" />
 
