@@ -4,6 +4,7 @@ import { LogoutButton } from "@/components/logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SuporteModal } from "@/components/aluno/suporte-modal";
 import { ComunidadeModal } from "@/components/aluno/comunidade-modal";
+import { EditarPerfilForm } from "@/components/aluno/editar-perfil-form";
 
 export default async function ContaPage() {
   const supabase = await createClient();
@@ -33,12 +34,7 @@ export default async function ContaPage() {
           <p className="text-base text-[var(--color-ink)]">{user.email}</p>
         </div>
 
-        {profile?.nome && (
-          <div className="space-y-1 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
-            <p className="text-sm text-[var(--color-ink-soft)]">Nome</p>
-            <p className="text-base text-[var(--color-ink)]">{profile.nome}</p>
-          </div>
-        )}
+        <EditarPerfilForm nomeInicial={profile?.nome ?? ""} />
 
         <div className="flex items-center justify-between rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
           <p className="text-sm text-[var(--color-ink)]">Modo noturno</p>

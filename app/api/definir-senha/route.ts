@@ -6,9 +6,13 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const token = typeof body?.token === "string" ? body.token : "";
   const senha = typeof body?.senha === "string" ? body.senha : "";
+  const nome = typeof body?.nome === "string" ? body.nome.trim() : "";
 
   if (!token) {
     return NextResponse.json({ error: "Token ausente." }, { status: 400 });
+  }
+  if (!nome) {
+    return NextResponse.json({ error: "Informe seu nome." }, { status: 400 });
   }
   if (senha.length < 8) {
     return NextResponse.json(
@@ -54,6 +58,8 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
+
+  await admin.from("profiles").update({ nome }).eq("id", created.user.id);
 
   // .is("usado_em", null) evita corrida entre dois envios simultâneos do
   // mesmo token marcando o convite como usado duas vezes.

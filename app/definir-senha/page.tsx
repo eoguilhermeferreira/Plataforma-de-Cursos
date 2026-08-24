@@ -16,6 +16,7 @@ function DefinirSenhaForm() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token") ?? "";
 
+  const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmacao, setConfirmacao] = useState("");
   const [erro, setErro] = useState<string | null>(null);
@@ -35,6 +36,10 @@ function DefinirSenhaForm() {
     e.preventDefault();
     setErro(null);
 
+    if (!nome.trim()) {
+      setErro("Informe seu nome.");
+      return;
+    }
     if (senha.length < 8) {
       setErro("A senha deve ter no mínimo 8 caracteres.");
       return;
@@ -49,7 +54,7 @@ function DefinirSenhaForm() {
       const res = await fetch("/api/definir-senha", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, senha }),
+        body: JSON.stringify({ token, senha, nome }),
       });
       const data = await res.json();
 
@@ -74,6 +79,20 @@ function DefinirSenhaForm() {
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="nome" className="mb-1 block text-sm font-medium text-[var(--color-ink)]">
+            Nome
+          </label>
+          <input
+            id="nome"
+            type="text"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            required
+            className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
+          />
+        </div>
+
         <div>
           <label htmlFor="senha" className="mb-1 block text-sm font-medium text-[var(--color-ink)]">
             Senha

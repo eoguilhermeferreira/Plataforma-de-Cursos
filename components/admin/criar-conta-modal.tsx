@@ -81,6 +81,7 @@ export function CriarContaModal() {
                     type="text"
                     value={nome}
                     onChange={(e) => setNome(e.target.value)}
+                    required
                     className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
                   />
                 </div>

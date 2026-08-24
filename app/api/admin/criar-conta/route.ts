@@ -27,6 +27,9 @@ export async function POST(request: Request) {
   if (!email || !isValidEmail(email)) {
     return NextResponse.json({ error: "Email inválido." }, { status: 400 });
   }
+  if (!nome) {
+    return NextResponse.json({ error: "Informe o nome." }, { status: 400 });
+  }
   if (senha.length < 8) {
     return NextResponse.json(
       { error: "A senha deve ter no mínimo 8 caracteres." },
@@ -48,9 +51,7 @@ export async function POST(request: Request) {
     );
   }
 
-  if (nome) {
-    await admin.from("profiles").update({ nome }).eq("id", created.user.id);
-  }
+  await admin.from("profiles").update({ nome }).eq("id", created.user.id);
 
   return NextResponse.json({ ok: true, id: created.user.id });
 }
