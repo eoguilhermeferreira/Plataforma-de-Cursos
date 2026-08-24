@@ -90,8 +90,9 @@ export async function getAlunosList(): Promise<AlunoRow[]> {
     });
   }
 
-  rows.sort((a, b) => (a.criadoEm < b.criadoEm ? 1 : -1));
-  return rows;
+  const apenasAlunos = rows.filter((r) => r.papel !== "admin");
+  apenasAlunos.sort((a, b) => (a.criadoEm < b.criadoEm ? 1 : -1));
+  return apenasAlunos;
 }
 
 export async function listAllAuthUsers(
