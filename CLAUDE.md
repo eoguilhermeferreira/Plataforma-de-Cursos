@@ -161,6 +161,7 @@ exam_answers      id, attempt_id, question_id, option_id, texto_resposta,
 comment_bank      id, question_id, texto, criado_por
 webhook_events    id, provider, external_id(unique), evento, payload,
                   recebido_em, processado_em, erro
+anotacoes         id, user_id(unique), texto, atualizado_em
 ```
 ---
 ## 8. UI

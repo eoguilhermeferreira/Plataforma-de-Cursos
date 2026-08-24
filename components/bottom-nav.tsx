@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconInicio, IconProva, IconConta } from "@/components/icons";
+import { IconPasta, IconProva, IconAnotacao, IconConta } from "@/components/icons";
 
 const ITENS = [
-  { href: "/", label: "Cursos", Icon: IconInicio },
+  { href: "/", label: "Materiais", Icon: IconPasta },
   { href: "/provas", label: "Provas", Icon: IconProva },
+  { href: "/anotacoes", label: "Notas", Icon: IconAnotacao },
   { href: "/conta", label: "Conta", Icon: IconConta },
 ];
 
