@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getCursosComProgresso } from "@/lib/progresso";
+import { getCapaUrl } from "@/lib/capas";
 import { ProgressRing } from "@/components/progress-ring";
 import { IconLivro } from "@/components/icons";
 
@@ -55,6 +56,7 @@ export default async function CursosPage() {
                   curso.totalAulas === 0
                     ? 0
                     : Math.round((curso.aulasConcluidas / curso.totalAulas) * 100);
+                const capaUrl = getCapaUrl(curso.capaPath);
 
                 return (
                   <li key={curso.id} className="mr-1.5 mb-1.5">
@@ -63,9 +65,20 @@ export default async function CursosPage() {
                       className="book-card group block rounded-xl border border-[var(--color-line)] bg-white p-4 transition-transform hover:-translate-y-0.5"
                     >
                       <div className="flex gap-3">
-                        <span className="book-spine flex h-20 w-3 shrink-0 items-start justify-center rounded-sm pt-2">
-                          <IconLivro className="h-3.5 w-3.5 text-white/70" />
-                        </span>
+                        {capaUrl ? (
+                          <span className="aspect-[2/3] w-16 shrink-0 overflow-hidden rounded-md shadow-sm">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={capaUrl}
+                              alt=""
+                              className="h-full w-full object-cover"
+                            />
+                          </span>
+                        ) : (
+                          <span className="book-spine flex h-20 w-3 shrink-0 items-start justify-center rounded-sm pt-2">
+                            <IconLivro className="h-3.5 w-3.5 text-white/70" />
+                          </span>
+                        )}
                         <div className="min-w-0 flex-1">
                           <p className="font-display text-sm font-semibold text-[var(--color-ink)]">
                             {curso.titulo}

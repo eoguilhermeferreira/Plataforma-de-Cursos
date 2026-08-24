@@ -4,7 +4,7 @@ export async function getCursosAdmin() {
   const supabase = await createClient();
   const { data } = await supabase
     .from("courses")
-    .select("id, titulo, descricao, publicado, criado_em")
+    .select("id, titulo, descricao, capa_path, publicado, criado_em")
     .order("criado_em", { ascending: false });
 
   return data ?? [];
@@ -14,7 +14,7 @@ export async function getCursoAdmin(id: string) {
   const supabase = await createClient();
   const { data: curso } = await supabase
     .from("courses")
-    .select("id, titulo, descricao, publicado, criado_em")
+    .select("id, titulo, descricao, capa_path, publicado, criado_em")
     .eq("id", id)
     .maybeSingle();
 

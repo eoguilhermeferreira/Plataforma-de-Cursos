@@ -57,6 +57,7 @@ export async function POST(
       ordem: count ?? 0,
       pdf_path: "pendente",
       tempo_minimo_segundos: Math.round(tempoMinimo),
+      publicado: true,
     })
     .select("id")
     .single();

@@ -4,6 +4,7 @@ export type CursoComProgresso = {
   id: string;
   titulo: string;
   descricao: string | null;
+  capaPath: string | null;
   totalAulas: number;
   aulasConcluidas: number;
 };
@@ -20,7 +21,7 @@ export async function getCursosComProgresso(
 ): Promise<CursoComProgresso[]> {
   const { data: cursos } = await supabase
     .from("courses")
-    .select("id, titulo, descricao")
+    .select("id, titulo, descricao, capa_path")
     .eq("publicado", true);
 
   if (!cursos || cursos.length === 0) return [];
@@ -62,6 +63,7 @@ export async function getCursosComProgresso(
     id: curso.id,
     titulo: curso.titulo,
     descricao: curso.descricao,
+    capaPath: curso.capa_path,
     totalAulas: totalPorCurso.get(curso.id) ?? 0,
     aulasConcluidas: concluidasPorCurso.get(curso.id) ?? 0,
   }));

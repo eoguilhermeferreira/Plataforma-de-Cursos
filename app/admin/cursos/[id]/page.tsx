@@ -2,8 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCursoAdmin } from "@/lib/admin-cursos";
 import { getExamsDoCurso } from "@/lib/admin-provas";
+import { getCapaUrl } from "@/lib/capas";
 import { EditarCursoForm } from "@/components/admin/editar-curso-form";
 import { AulasEditor } from "@/components/admin/aulas-editor";
+import { CapaCursoUploader } from "@/components/admin/capa-curso-uploader";
 
 const STATUS_LABEL: Record<string, string> = {
   rascunho: "Rascunho",
@@ -30,6 +32,10 @@ export default async function AdminCursoDetalhePage({
   return (
     <div className="space-y-8">
       <EditarCursoForm curso={curso} />
+      <CapaCursoUploader
+        cursoId={curso.id}
+        capaUrlInicial={getCapaUrl(curso.capa_path)}
+      />
       <AulasEditor cursoId={curso.id} aulasIniciais={aulas} />
 
       <section className="rounded-lg border border-[var(--color-line)] bg-white p-4">
