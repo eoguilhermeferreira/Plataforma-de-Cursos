@@ -279,7 +279,7 @@ export function RevisaoProva({
               value={titulo}
               onChange={(e) => setTitulo(e.target.value)}
               disabled={!editavel}
-              className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
+              className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none disabled:bg-[var(--color-royal-soft)] disabled:text-[var(--color-ink-soft)]"
             />
           </div>
 
@@ -294,7 +294,7 @@ export function RevisaoProva({
               value={notaMinima}
               onChange={(e) => setNotaMinima(Number(e.target.value))}
               disabled={!editavel}
-              className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
+              className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none disabled:bg-[var(--color-royal-soft)] disabled:text-[var(--color-ink-soft)]"
             />
           </div>
 
@@ -308,7 +308,7 @@ export function RevisaoProva({
               value={tentativasMax}
               onChange={(e) => setTentativasMax(Number(e.target.value))}
               disabled={!editavel}
-              className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
+              className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none disabled:bg-[var(--color-royal-soft)] disabled:text-[var(--color-ink-soft)]"
             />
           </div>
 
@@ -374,7 +374,7 @@ export function RevisaoProva({
               onChange={(e) => atualizarQuestao(index, { enunciado: e.target.value })}
               disabled={!editavel}
               rows={3}
-              className="mt-2 w-full rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
+              className="mt-2 w-full rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm focus:border-[var(--color-royal)] focus:outline-none disabled:bg-[var(--color-royal-soft)] disabled:text-[var(--color-ink-soft)]"
             />
 
             <div className="mt-3 flex flex-wrap items-center gap-3">
@@ -443,7 +443,7 @@ export function RevisaoProva({
                         atualizarOpcaoTexto(index, opcaoIndex, e.target.value)
                       }
                       disabled={!editavel || questao.tipo === "verdadeiro_falso"}
-                      className="flex-1 rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
+                      className="flex-1 rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm focus:border-[var(--color-royal)] focus:outline-none disabled:bg-[var(--color-royal-soft)] disabled:text-[var(--color-ink-soft)]"
                     />
                     {editavel &&
                       questao.tipo === "objetiva" &&

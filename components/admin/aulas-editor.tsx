@@ -120,7 +120,7 @@ export function AulasEditor({
             }}
             onDragOver={(e) => e.preventDefault()}
             onDrop={() => handleDrop(index)}
-            className="rounded-lg border border-[var(--color-line)] bg-gray-50 p-3"
+            className="rounded-lg border border-[var(--color-line)] bg-[var(--color-royal-soft)] p-3"
           >
             <div className="flex items-start gap-2">
               <span
@@ -140,7 +140,7 @@ export function AulasEditor({
                       atualizarAula(aula.id, { titulo: valor });
                     }
                   }}
-                  className="w-full rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm font-medium text-[var(--color-ink)] focus:border-[var(--color-royal)] focus:outline-none"
+                  className="w-full rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] px-3 py-2 text-sm font-medium text-[var(--color-ink)] focus:border-[var(--color-royal)] focus:outline-none"
                 />
 
                 <div className="flex flex-wrap items-center gap-2 text-xs text-[var(--color-ink-soft)]">
@@ -162,7 +162,7 @@ export function AulasEditor({
                           });
                         }
                       }}
-                      className="w-20 rounded border border-[var(--color-line)] px-2 py-1"
+                      className="w-20 rounded border border-[var(--color-line)] bg-[var(--color-paper)] px-2 py-1 text-[var(--color-ink)]"
                     />
                   </label>
                   <span>versão {aula.versao}</span>
