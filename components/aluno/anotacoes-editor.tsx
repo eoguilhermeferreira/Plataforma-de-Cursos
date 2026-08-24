@@ -47,7 +47,7 @@ export function AnotacoesEditor({ textoInicial }: { textoInicial: string }) {
       <textarea
         value={texto}
         onChange={(e) => handleChange(e.target.value)}
-        placeholder="Escreva suas anotações aqui — sobre as aulas, dúvidas, o que quiser."
+        placeholder="Escreva suas anotações sobre as aulas, dúvidas ou qualquer outra coisa."
         rows={16}
         className="w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4 text-sm text-[var(--color-ink)] focus:border-[var(--color-royal)] focus:outline-none"
       />

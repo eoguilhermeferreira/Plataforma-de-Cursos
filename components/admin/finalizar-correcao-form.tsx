@@ -52,15 +52,15 @@ export function FinalizarCorrecaoForm({
         Analisar e finalizar
       </h2>
       <p className="mt-1 text-xs text-[var(--color-ink-soft)]">
-        A correção automática das objetivas acima é só sugestão — confira as
-        respostas e ajuste a nota se alguma resposta tiver fundamento no
+        A correção automática das objetivas acima é só uma sugestão. Confira
+        as respostas e ajuste a nota se alguma resposta tiver fundamento no
         material. A nota só aparece pro aluno depois de você finalizar aqui.
       </p>
 
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label className="text-sm">
           <span className="mb-1 block font-medium text-[var(--color-ink)]">
-            Nota final (0–100)
+            Nota final (0 a 100)
           </span>
           <input
             type="number"

@@ -49,7 +49,7 @@ export function CapaCursoUploader({
       <p className="mt-1 text-xs text-[var(--color-ink-soft)]">
         Aparece na tela inicial do aluno. Tamanho recomendado:{" "}
         {CAPA_LARGURA_RECOMENDADA} × {CAPA_ALTURA_RECOMENDADA}px (retrato,
-        proporção 2:3) — nessa proporção a imagem não fica cortada.
+        proporção 2:3). Nessa proporção a imagem não fica cortada.
       </p>
 
       <div className="mt-3 flex items-start gap-4">

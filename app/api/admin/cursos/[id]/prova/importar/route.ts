@@ -66,7 +66,7 @@ export async function POST(
     .from("exams")
     .insert({
       course_id: courseId,
-      titulo: `Prova — ${curso.titulo}`,
+      titulo: `Prova de ${curso.titulo}`,
       versao: proximaVersao,
       status: "rascunho",
       mostrar_gabarito: true,

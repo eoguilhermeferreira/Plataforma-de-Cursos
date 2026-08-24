@@ -108,7 +108,7 @@ export function ConvidarAlunoModal() {
               <div className="mt-4 space-y-4">
                 <p className="text-sm text-[var(--color-ink-soft)]">
                   Convite criado. O envio por email ainda não está integrado
-                  nesta fase — copie o link e envie manualmente.
+                  nesta fase. Copie o link e envie manualmente.
                 </p>
                 <div className="break-all rounded-lg bg-gray-100 p-3 text-xs text-gray-800">
                   {link}

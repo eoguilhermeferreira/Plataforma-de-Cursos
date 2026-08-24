@@ -44,7 +44,7 @@ export default async function ProvaHubPage({
           {curso.titulo}
         </h1>
         <p className="mt-4 text-sm text-[var(--color-ink-soft)]">
-          Todas as aulas concluídas! A prova ainda não foi publicada — volte em
+          Todas as aulas concluídas! A prova ainda não foi publicada. Volte em
           breve.
         </p>
       </div>

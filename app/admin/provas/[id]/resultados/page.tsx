@@ -51,8 +51,8 @@ export default async function AdminResultadosPage({
             Acerto por questão
           </h2>
           <p className="mt-1 text-xs text-[var(--color-ink-soft)]">
-            Questão com menos de 40% de acerto vem destacada — ou o material está
-            confuso, ou a questão está mal escrita.
+            Questão com menos de 40% de acerto vem destacada. Pode ser que o
+            material esteja confuso, ou que a questão esteja mal escrita.
           </p>
           <ul className="mt-3 space-y-2">
             {estatisticas.map((e) => (

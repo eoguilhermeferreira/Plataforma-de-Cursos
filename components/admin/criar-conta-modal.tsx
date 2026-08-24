@@ -65,7 +65,7 @@ export function CriarContaModal() {
             {!sucesso ? (
               <form onSubmit={handleSubmit} className="mt-4 space-y-4">
                 <p className="text-xs text-[var(--color-ink-soft)]">
-                  Cria a conta na hora, sem link — combine o email e a senha
+                  Cria a conta na hora, sem link. Combine o email e a senha
                   direto com o cliente.
                 </p>
 

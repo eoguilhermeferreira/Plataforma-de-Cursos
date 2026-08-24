@@ -48,7 +48,7 @@ export function ComunidadeModal({ className }: { className?: string }) {
             </h2>
             <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
               Lá você troca ideia com outros alunos, tira dúvidas sobre o
-              material e fica por dentro dos avisos — tudo direto no
+              material e fica por dentro dos avisos, tudo direto no
               WhatsApp.
             </p>
 

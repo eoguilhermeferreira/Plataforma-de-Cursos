@@ -255,9 +255,9 @@ export function RevisaoProva({
 
       {!editavel && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-          Esta prova já foi publicada e é imutável (regra 11 do CLAUDE.md). Pra
-          mudar qualquer coisa, crie uma nova versão — ela parte de uma cópia
-          desta prova em rascunho.
+          Esta prova já foi publicada e é imutável. Pra mudar qualquer coisa,
+          crie uma nova versão. Ela parte de uma cópia desta prova em
+          rascunho.
           <button
             type="button"
             onClick={criarNovaVersao}
