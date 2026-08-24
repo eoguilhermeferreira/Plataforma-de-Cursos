@@ -76,7 +76,7 @@ export default async function ProvaHubPage({
       </h1>
 
       {emAndamento ? (
-        <div className="mt-4 rounded-xl border border-[var(--color-line)] bg-white p-4">
+        <div className="mt-4 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
           <p className="text-sm text-[var(--color-ink-soft)]">
             Você tem uma prova em andamento.
           </p>
@@ -90,7 +90,7 @@ export default async function ProvaHubPage({
       ) : (
         <div className="mt-4 space-y-4">
           {ultimaEnviada && (
-            <div className="rounded-xl border border-[var(--color-line)] bg-white p-4">
+            <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
               <p className="text-sm text-[var(--color-ink-soft)]">
                 {ultimaEnviada.status === "aguardando_correcao"
                   ? "Sua última tentativa está em correção."

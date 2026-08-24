@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { LogoutButton } from "@/components/logout-button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default async function ContaPage() {
   const supabase = await createClient();
@@ -25,17 +26,22 @@ export default async function ContaPage() {
       </h1>
 
       <div className="mt-6 max-w-md space-y-4">
-        <div className="space-y-1 rounded-xl border border-[var(--color-line)] bg-white p-4">
+        <div className="space-y-1 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
           <p className="text-sm text-[var(--color-ink-soft)]">Email</p>
           <p className="text-base text-[var(--color-ink)]">{user.email}</p>
         </div>
 
         {profile?.nome && (
-          <div className="space-y-1 rounded-xl border border-[var(--color-line)] bg-white p-4">
+          <div className="space-y-1 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
             <p className="text-sm text-[var(--color-ink-soft)]">Nome</p>
             <p className="text-base text-[var(--color-ink)]">{profile.nome}</p>
           </div>
         )}
+
+        <div className="flex items-center justify-between rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
+          <p className="text-sm text-[var(--color-ink)]">Modo noturno</p>
+          <ThemeToggle className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--color-line)] text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]" />
+        </div>
 
         <LogoutButton className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base font-medium text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]" />
       </div>

@@ -3,10 +3,14 @@ import { createClient, createServiceRoleClient } from "@/lib/supabase/server";
 import { corrigirTentativa, type QuestaoParaCorrigir } from "@/lib/prova-correcao";
 
 /**
- * Envia a tentativa: corrige objetivas/V-F, calcula nota, decide status
- * (corrigida ou aguardando_correcao se houver discursiva) e consome a
- * tentativa. Idempotente — clicar duas vezes não cria nem corrige duas
- * vezes, só devolve o estado já enviado na segunda chamada.
+ * Envia a tentativa: corrige objetivas/V-F automaticamente (referência pro
+ * avaliador) e consome a tentativa, mas nunca finaliza nota/aprovação
+ * sozinha — toda tentativa enviada vai para análise humana antes do aluno
+ * ver o resultado (decisão de negócio: gabarito automático pode estar
+ * errado ou a resposta do aluno pode ter fundamento no material). Quem
+ * finaliza é o admin, em /admin/correcoes. Idempotente — clicar duas vezes
+ * não cria nem corrige duas vezes, só devolve o estado já enviado na
+ * segunda chamada.
  */
 export async function POST(
   _request: Request,
@@ -39,7 +43,7 @@ export async function POST(
 
   const { data: exam } = await supabase
     .from("exams")
-    .select("nota_minima")
+    .select("id")
     .eq("id", attempt.exam_id)
     .maybeSingle();
 
@@ -101,21 +105,15 @@ export async function POST(
     }),
   );
 
-  const status = resultado.temDiscursivaPendente ? "aguardando_correcao" : "corrigida";
-  const notaFinal = resultado.temDiscursivaPendente ? null : resultado.notaObjetiva;
-  const aprovado = resultado.temDiscursivaPendente
-    ? null
-    : notaFinal !== null && notaFinal >= exam.nota_minima;
-
   const { error } = await admin
     .from("exam_attempts")
     .update({
       enviado_em: new Date().toISOString(),
-      status,
+      status: "aguardando_correcao",
       nota_objetiva: resultado.notaObjetiva,
-      nota_final: notaFinal,
-      aprovado,
-      corrigido_em: status === "corrigida" ? new Date().toISOString() : null,
+      nota_final: null,
+      aprovado: null,
+      corrigido_em: null,
     })
     .eq("id", attemptId);
 

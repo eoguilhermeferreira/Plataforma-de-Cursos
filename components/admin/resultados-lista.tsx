@@ -69,7 +69,7 @@ export function ResultadosLista({
         </div>
       </div>
 
-      <div className="mt-4 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white">
+      <div className="mt-4 overflow-hidden rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)]">
         <ul className="divide-y divide-[var(--color-line)]">
           {filtradas.map((linha) => (
             <li

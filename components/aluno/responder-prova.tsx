@@ -184,7 +184,7 @@ export function ResponderProva({
         ))}
       </div>
 
-      <div className="mt-6 rounded-xl border border-[var(--color-line)] bg-white p-4">
+      <div className="mt-6 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
         <p className="whitespace-pre-line text-base text-[var(--color-ink)]">
           {questao.enunciado}
         </p>

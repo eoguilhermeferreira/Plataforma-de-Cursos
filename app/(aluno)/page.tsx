@@ -62,7 +62,7 @@ export default async function CursosPage() {
                   <li key={curso.id} className="mr-1.5 mb-1.5">
                     <Link
                       href={`/cursos/${curso.id}`}
-                      className="book-card group block rounded-xl border border-[var(--color-line)] bg-white p-4 transition-transform hover:-translate-y-0.5"
+                      className="book-card group block rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4 transition-transform hover:-translate-y-0.5"
                     >
                       <div className="flex gap-3">
                         {capaUrl ? (
@@ -113,7 +113,7 @@ export default async function CursosPage() {
 
         {cursos.length > 0 && (
           <aside className="mt-8 lg:mt-0 lg:w-72 lg:shrink-0">
-            <div className="rounded-xl border border-[var(--color-line)] bg-white p-5">
+            <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-5">
               <p className="font-display text-sm font-semibold text-[var(--color-ink)]">
                 Seu progresso geral
               </p>

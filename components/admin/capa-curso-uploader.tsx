@@ -44,7 +44,7 @@ export function CapaCursoUploader({
   }
 
   return (
-    <section className="rounded-lg border border-[var(--color-line)] bg-white p-4">
+    <section className="rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
       <h2 className="text-base font-semibold text-[var(--color-ink)]">Capa do curso</h2>
       <p className="mt-1 text-xs text-[var(--color-ink-soft)]">
         Aparece na tela inicial do aluno. Tamanho recomendado:{" "}

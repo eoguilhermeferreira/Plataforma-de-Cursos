@@ -88,10 +88,16 @@ Regras de stack:
     - ligado: aluno vê nota, quais errou e a alternativa correta;
     - desligado: aluno vê nota e quais errou, com link para a aula, mas **não**
       a resposta certa.
-20. Objetivas e V/F: corrigidas na hora do envio.
-    Discursivas: nota e comentário manuais.
-21. Enquanto houver discursiva pendente, o status é `aguardando_correcao` e o
-    aluno vê "Em correção" — nunca uma nota parcial.
+20. **Nenhuma tentativa corrige sozinha (decisão revista em 2026-08-24).**
+    Toda tentativa enviada vira `aguardando_correcao`, mesmo sem nenhuma
+    discursiva. Objetivas e V/F são corrigidas automaticamente na hora do
+    envio (`nota_objetiva`), mas isso é só sugestão pro avaliador — a gabarito
+    automático pode estar errado, ou a resposta do aluno pode ter fundamento
+    no material. `nota_final`/`aprovado` só existem depois que um admin
+    analisa e finaliza manualmente (pode confirmar a nota sugerida ou
+    ajustar). Discursivas continuam com nota e comentário manuais.
+21. Enquanto não finalizada, o status é `aguardando_correcao` e o aluno vê
+    "Em correção" — nunca uma nota parcial.
 ### Correção
 16. Fila de correção: uma tentativa é atribuída a um avaliador por vez, com
     trava para dois não corrigirem a mesma.
@@ -174,10 +180,12 @@ webhook_events    id, provider, external_id(unique), evento, payload,
 | 4    | Envio, correção automática, resultado                          | —      |
 | 5    | "Minhas Provas" e resultados no admin                          | —      |
 | 6    | Webhook Cakto, reembolso, revogação, corrigir email            | —      |
-| 7    | Fila de correção manual de discursivas                         | adiada* |
-\* A primeira prova real tem 20 questões e **nenhuma discursiva**. O banco já
-suporta o tipo, mas a fila de correção só será construída quando existir uma
-prova que precise dela.
+| 7    | Fila de correção com trava por avaliador e banco de comentários | adiada* |
+\* Toda tentativa já passa por análise humana antes do aluno ver a nota (regra
+20/21), com uma tela simples de finalizar em `/admin/correcoes` — o que falta
+da Fase 7 original é a fila com **trava** pra dois avaliadores não pegarem a
+mesma tentativa e o banco de comentários reutilizáveis, que só fazem sentido
+quando existir mais de um avaliador ou uma prova com discursiva de verdade.
 **Uma fase por sessão. Commit ao final de cada fase.** Sessão que tenta fazer
 duas fases estoura o contexto no meio e deixa o código pela metade.
 ---

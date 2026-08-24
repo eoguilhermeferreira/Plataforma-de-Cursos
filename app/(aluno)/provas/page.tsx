@@ -35,7 +35,7 @@ export default async function ProvasPage() {
             return (
               <li
                 key={curso.id}
-                className="rounded-xl border border-[var(--color-line)] bg-white p-4"
+                className="rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>

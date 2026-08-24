@@ -269,7 +269,7 @@ export function RevisaoProva({
         </div>
       )}
 
-      <section className="rounded-lg border border-[var(--color-line)] bg-white p-4">
+      <section className="rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
         <h2 className="text-base font-semibold text-[var(--color-ink)]">Configurações</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
@@ -353,7 +353,7 @@ export function RevisaoProva({
 
       <section className="space-y-4">
         {questoes.map((questao, index) => (
-          <div key={index} className="rounded-lg border border-[var(--color-line)] bg-white p-4">
+          <div key={index} className="rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
             <div className="flex items-start justify-between gap-2">
               <span className="text-sm font-semibold text-[var(--color-ink)]">
                 Questão {index + 1}
@@ -488,7 +488,7 @@ export function RevisaoProva({
       {ok && <p className="text-sm text-green-700">{ok}</p>}
 
       {editavel && (
-        <div className="sticky bottom-20 flex gap-2 rounded-lg border border-[var(--color-line)] bg-white p-3 shadow sm:bottom-4">
+        <div className="sticky bottom-20 flex gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] p-3 shadow sm:bottom-4">
           <button
             type="button"
             onClick={salvarRascunho}

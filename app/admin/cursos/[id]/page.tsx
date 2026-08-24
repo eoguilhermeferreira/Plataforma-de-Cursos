@@ -38,7 +38,7 @@ export default async function AdminCursoDetalhePage({
       />
       <AulasEditor cursoId={curso.id} aulasIniciais={aulas} />
 
-      <section className="rounded-lg border border-[var(--color-line)] bg-white p-4">
+      <section className="rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-semibold text-[var(--color-ink)]">Prova</h2>
           {examAtual && (

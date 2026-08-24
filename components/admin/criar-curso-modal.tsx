@@ -54,7 +54,7 @@ export function CriarCursoModal() {
 
       {aberto && (
         <div className="fixed inset-0 z-20 flex items-end justify-center bg-black/40 sm:items-center">
-          <div className="w-full max-w-sm rounded-t-xl bg-white p-6 sm:rounded-xl">
+          <div className="w-full max-w-sm rounded-t-xl bg-[var(--color-paper)] p-6 sm:rounded-xl">
             <h2 className="text-lg font-semibold text-[var(--color-ink)]">Criar curso</h2>
 
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">

@@ -46,7 +46,7 @@ export default async function AdminResultadosPage({
       </div>
 
       {estatisticas.length > 0 && (
-        <section className="mt-6 rounded-lg border border-[var(--color-line)] bg-white p-4">
+        <section className="mt-6 rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
           <h2 className="text-base font-semibold text-[var(--color-ink)]">
             Acerto por questão
           </h2>

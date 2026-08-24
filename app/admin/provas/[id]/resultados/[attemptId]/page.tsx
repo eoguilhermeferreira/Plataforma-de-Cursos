@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient, createServiceRoleClient } from "@/lib/supabase/server";
 import { getResultadoTentativa, type ExamAttemptRow } from "@/lib/exam-attempt";
+import { FinalizarCorrecaoForm } from "@/components/admin/finalizar-correcao-form";
 
 export default async function AdminTentativaDetalhePage({
   params,
@@ -53,7 +54,7 @@ export default async function AdminTentativaDetalhePage({
       </h1>
       <p className="text-xs text-[var(--color-ink-soft)]">{authUser.user?.email}</p>
 
-      <div className="mt-4 rounded-lg border border-[var(--color-line)] bg-white p-4">
+      <div className="mt-4 rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
         <div className="flex items-center justify-between">
           <span className="text-sm text-[var(--color-ink-soft)]">
             {attempt.status === "aguardando_correcao"
@@ -74,9 +75,17 @@ export default async function AdminTentativaDetalhePage({
         </div>
       </div>
 
+      {attempt.status === "aguardando_correcao" && (
+        <FinalizarCorrecaoForm
+          attemptId={attempt.id}
+          notaSugerida={attempt.nota_objetiva ?? 0}
+          notaMinima={resultado.exam.nota_minima}
+        />
+      )}
+
       <ul className="mt-6 space-y-4">
         {resultado.questoes.map((questao) => (
-          <li key={questao.id} className="rounded-lg border border-[var(--color-line)] bg-white p-4">
+          <li key={questao.id} className="rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
             <p className="text-sm font-medium text-[var(--color-ink)]">
               Questão {questao.ordem + 1}
               {questao.correta === true && (

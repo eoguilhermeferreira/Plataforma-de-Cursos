@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconInicio, IconProva, IconConta, IconLivro, IconSair } from "@/components/icons";
 import { LogoutButton } from "@/components/logout-button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const ITENS = [
   { href: "/", label: "Meus cursos", Icon: IconInicio },
@@ -59,12 +60,13 @@ export function Sidebar({
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-royal)] text-sm font-semibold text-white">
             {(nome ?? email ?? "?").charAt(0).toUpperCase()}
           </span>
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-medium text-white">
               {nome || email}
             </p>
             <p className="truncate text-xs text-[#8891C7]">Aluno</p>
           </div>
+          <ThemeToggle className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[#B9C2F0] hover:bg-white/10 hover:text-white" />
         </div>
         <div className="px-2">
           <LogoutButton

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { IconCursos, IconAlunos, IconCorrecao, IconLivro, IconSair } from "@/components/icons";
 import { LogoutButton } from "@/components/logout-button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default async function AdminLayout({
   children,
@@ -63,15 +64,16 @@ export default async function AdminLayout({
               <IconCorrecao className="h-4 w-4" />
               <span className="hidden sm:inline">Correções</span>
             </Link>
+            <ThemeToggle className="ml-1 flex h-9 w-9 items-center justify-center rounded-lg text-[#B9C2F0] hover:bg-white/10 hover:text-white" />
             <LogoutButton
               icon={<IconSair className="h-4 w-4" />}
-              className="ml-1 flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-white hover:bg-white/10"
+              className="flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-white hover:bg-white/10"
             />
           </nav>
         </div>
       </header>
       <main className="mx-auto max-w-5xl px-4 py-8 md:px-8">
-        <div className="rounded-2xl border border-[var(--color-line)] bg-white p-5 md:p-8">
+        <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-paper)] p-5 md:p-8">
           {children}
         </div>
       </main>

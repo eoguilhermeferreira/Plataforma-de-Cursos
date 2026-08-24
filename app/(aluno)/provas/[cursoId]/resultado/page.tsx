@@ -54,12 +54,12 @@ export default async function ResultadoProvaPage({
         <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4">
           <p className="text-sm font-medium text-amber-800">Em correção</p>
           <p className="mt-1 text-sm text-amber-700">
-            Esta prova tem questão discursiva e está aguardando correção manual.
-            Sua nota aparece aqui assim que a correção terminar.
+            Sua prova está em análise. Sua nota aparece aqui assim que a
+            correção terminar.
           </p>
         </div>
       ) : (
-        <div className="mt-6 rounded-xl border border-[var(--color-line)] bg-white p-4">
+        <div className="mt-6 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-display text-3xl font-semibold text-[var(--color-ink)]">
@@ -97,7 +97,7 @@ export default async function ResultadoProvaPage({
             {erradas.map((questao) => (
               <li
                 key={questao.id}
-                className="rounded-xl border border-[var(--color-line)] bg-white p-4"
+                className="rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4"
               >
                 <p className="text-sm font-medium text-[var(--color-ink)]">
                   Questão {questao.ordem + 1}

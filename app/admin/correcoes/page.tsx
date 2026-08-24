@@ -13,7 +13,7 @@ export default async function AdminCorrecoesPage() {
         Tentativas com questão discursiva aguardando nota e comentário.
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white">
+      <div className="mt-6 overflow-hidden rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)]">
         <ul className="divide-y divide-[var(--color-line)]">
           {pendentes.map((p) => (
             <li key={p.attemptId}>

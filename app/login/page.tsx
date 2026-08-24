@@ -35,7 +35,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen bg-white">
+    <main className="flex min-h-screen bg-[var(--color-paper)]">
       <div className="hidden w-[42%] flex-col justify-between bg-[var(--color-royal-deep)] p-10 lg:flex">
         <div className="flex items-center gap-2">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-royal)] text-white">

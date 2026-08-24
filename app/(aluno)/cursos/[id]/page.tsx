@@ -51,7 +51,7 @@ export default async function CursoDetalhePage({
           <li key={aula.id}>
             <Link
               href={`/cursos/${curso.id}/aula/${aula.id}`}
-              className="flex items-center justify-between gap-3 rounded-xl border border-[var(--color-line)] bg-white p-4 hover:border-[var(--color-royal)]"
+              className="flex items-center justify-between gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4 hover:border-[var(--color-royal)]"
             >
               <div>
                 <p className="text-sm font-medium text-[var(--color-ink)]">
