@@ -38,7 +38,7 @@ export function IniciarProvaButton({
         type="button"
         onClick={iniciar}
         disabled={carregando}
-        className="block w-full rounded-lg bg-gray-900 px-4 py-3 text-center text-sm font-medium text-white disabled:opacity-50"
+        className="block w-full rounded-lg bg-[var(--color-royal)] px-4 py-3 text-center text-sm font-medium text-white hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
       >
         {carregando ? "Iniciando..." : "Iniciar prova"}
       </button>

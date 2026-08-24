@@ -49,7 +49,7 @@ export function CriarCursoModal() {
     <>
       <button
         onClick={() => setAberto(true)}
-        className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white"
+        className="rounded-lg bg-[var(--color-royal)] px-4 py-2 text-sm font-medium text-white"
       >
         Criar curso
       </button>
@@ -57,13 +57,13 @@ export function CriarCursoModal() {
       {aberto && (
         <div className="fixed inset-0 z-20 flex items-end justify-center bg-black/40 sm:items-center">
           <div className="w-full max-w-sm rounded-t-xl bg-white p-6 sm:rounded-xl">
-            <h2 className="text-lg font-semibold text-gray-900">Criar curso</h2>
+            <h2 className="text-lg font-semibold text-[var(--color-ink)]">Criar curso</h2>
 
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">
               <div>
                 <label
                   htmlFor="titulo-curso"
-                  className="mb-1 block text-sm font-medium text-gray-700"
+                  className="mb-1 block text-sm font-medium text-[var(--color-ink)]"
                 >
                   Título
                 </label>
@@ -73,14 +73,14 @@ export function CriarCursoModal() {
                   value={titulo}
                   onChange={(e) => setTitulo(e.target.value)}
                   required
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
+                  className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="descricao-curso"
-                  className="mb-1 block text-sm font-medium text-gray-700"
+                  className="mb-1 block text-sm font-medium text-[var(--color-ink)]"
                 >
                   Descrição
                 </label>
@@ -89,12 +89,12 @@ export function CriarCursoModal() {
                   value={descricao}
                   onChange={(e) => setDescricao(e.target.value)}
                   rows={3}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
+                  className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
                 />
               </div>
 
               <div>
-                <span className="mb-1 block text-sm font-medium text-gray-700">
+                <span className="mb-1 block text-sm font-medium text-[var(--color-ink)]">
                   Público
                 </span>
                 <div className="flex gap-2">
@@ -105,8 +105,8 @@ export function CriarCursoModal() {
                       onClick={() => setPublico(opcao)}
                       className={`flex-1 rounded-lg border px-4 py-3 text-sm font-medium ${
                         publico === opcao
-                          ? "border-gray-900 bg-gray-900 text-white"
-                          : "border-gray-300 text-gray-700"
+                          ? "border-[var(--color-royal)] bg-[var(--color-royal)] text-white"
+                          : "border-[var(--color-line)] text-[var(--color-ink)]"
                       }`}
                     >
                       {opcao === "interno" ? "Interno" : "Externo"}
@@ -121,14 +121,14 @@ export function CriarCursoModal() {
                 <button
                   type="button"
                   onClick={fechar}
-                  className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-sm font-medium text-gray-700"
+                  className="flex-1 rounded-lg border border-[var(--color-line)] px-4 py-3 text-sm font-medium text-[var(--color-ink)]"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={carregando}
-                  className="flex-1 rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
+                  className="flex-1 rounded-lg bg-[var(--color-royal)] px-4 py-3 text-sm font-medium text-white hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
                 >
                   {carregando ? "Criando..." : "Criar"}
                 </button>

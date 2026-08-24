@@ -19,7 +19,7 @@ export default async function RevisaoProvaPage({
     <div>
       <Link
         href={`/admin/cursos/${courseId}`}
-        className="text-xs text-gray-500 underline"
+        className="text-xs text-[var(--color-ink-soft)] underline"
       >
         ← Voltar para o curso
       </Link>

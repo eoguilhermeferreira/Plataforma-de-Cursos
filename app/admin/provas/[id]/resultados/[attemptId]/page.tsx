@@ -43,19 +43,19 @@ export default async function AdminTentativaDetalhePage({
     <div>
       <Link
         href={`/admin/provas/${examId}/resultados`}
-        className="text-xs text-gray-500 underline"
+        className="text-xs text-[var(--color-ink-soft)] underline"
       >
         ← Voltar para resultados
       </Link>
 
-      <h1 className="mt-2 text-xl font-semibold text-gray-900">
+      <h1 className="mt-2 text-xl font-semibold text-[var(--color-ink)]">
         {profile?.nome || authUser.user?.email}
       </h1>
-      <p className="text-xs text-gray-500">{authUser.user?.email}</p>
+      <p className="text-xs text-[var(--color-ink-soft)]">{authUser.user?.email}</p>
 
-      <div className="mt-4 rounded-lg border border-gray-200 bg-white p-4">
+      <div className="mt-4 rounded-lg border border-[var(--color-line)] bg-white p-4">
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-600">
+          <span className="text-sm text-[var(--color-ink-soft)]">
             {attempt.status === "aguardando_correcao"
               ? "Em correção"
               : `Nota: ${attempt.nota_final?.toFixed(0)}%`}
@@ -76,8 +76,8 @@ export default async function AdminTentativaDetalhePage({
 
       <ul className="mt-6 space-y-4">
         {resultado.questoes.map((questao) => (
-          <li key={questao.id} className="rounded-lg border border-gray-200 bg-white p-4">
-            <p className="text-sm font-medium text-gray-900">
+          <li key={questao.id} className="rounded-lg border border-[var(--color-line)] bg-white p-4">
+            <p className="text-sm font-medium text-[var(--color-ink)]">
               Questão {questao.ordem + 1}
               {questao.correta === true && (
                 <span className="ml-2 text-xs text-green-700">✓ correta</span>
@@ -89,12 +89,12 @@ export default async function AdminTentativaDetalhePage({
                 <span className="ml-2 text-xs text-amber-700">pendente</span>
               )}
             </p>
-            <p className="mt-1 whitespace-pre-line text-sm text-gray-700">
+            <p className="mt-1 whitespace-pre-line text-sm text-[var(--color-ink)]">
               {questao.enunciado}
             </p>
 
             {questao.tipo === "discursiva" ? (
-              <p className="mt-3 rounded-lg bg-gray-50 p-3 text-sm text-gray-700">
+              <p className="mt-3 rounded-lg bg-gray-50 p-3 text-sm text-[var(--color-ink)]">
                 {questao.textoResposta || "(sem resposta)"}
               </p>
             ) : (
@@ -107,7 +107,7 @@ export default async function AdminTentativaDetalhePage({
                         ? "border-green-300 bg-green-50 text-green-800"
                         : opcao.escolhida
                           ? "border-red-300 bg-red-50 text-red-800"
-                          : "border-gray-200 text-gray-600"
+                          : "border-[var(--color-line)] text-[var(--color-ink-soft)]"
                     }`}
                   >
                     {opcao.texto}

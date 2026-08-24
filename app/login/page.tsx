@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { IconLivro } from "@/components/icons";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -34,67 +35,112 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-sm rounded-xl bg-white p-6 shadow-sm">
-        <h1 className="mb-6 text-center text-xl font-semibold text-gray-900">
-          Entrar
-        </h1>
+    <main className="flex min-h-screen bg-white">
+      <div className="hidden w-[42%] flex-col justify-between bg-[var(--color-royal-deep)] p-10 lg:flex">
+        <div className="flex items-center gap-2">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-royal)] text-white">
+            <IconLivro className="h-5 w-5" />
+          </span>
+          <span className="font-display text-base font-semibold text-white">
+            Plataforma
+          </span>
+        </div>
+        <div>
+          <p className="font-display text-3xl font-semibold leading-tight text-white">
+            Estude no seu ritmo,
+            <br />
+            prove o que aprendeu.
+          </p>
+          <p className="mt-3 max-w-sm text-sm text-[#B9C2F0]">
+            Materiais em PDF liberados aula a aula, com prova avaliada ao final
+            de cada curso.
+          </p>
+        </div>
+        <p className="text-xs text-[#8891C7]">
+          Acesso liberado por convite do administrador.
+        </p>
+      </div>
 
-        {!modoReenvio ? (
-          <>
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div>
-                <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  autoComplete="email"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
-                />
-              </div>
+      <div className="flex flex-1 items-center justify-center px-4 py-12">
+        <div className="w-full max-w-sm">
+          <div className="mb-8 flex items-center gap-2 lg:hidden">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-royal)] text-white">
+              <IconLivro className="h-5 w-5" />
+            </span>
+            <span className="font-display text-base font-semibold text-[var(--color-ink)]">
+              Plataforma
+            </span>
+          </div>
 
-              <div>
-                <label htmlFor="senha" className="mb-1 block text-sm font-medium text-gray-700">
-                  Senha
-                </label>
-                <input
-                  id="senha"
-                  type="password"
-                  value={senha}
-                  onChange={(e) => setSenha(e.target.value)}
-                  required
-                  autoComplete="current-password"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
-                />
-              </div>
+          <h1 className="font-display text-2xl font-semibold text-[var(--color-ink)]">
+            Entrar
+          </h1>
+          <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
+            Use o email e a senha que você recebeu.
+          </p>
 
-              {erro && <p className="text-sm text-red-600">{erro}</p>}
+          {!modoReenvio ? (
+            <>
+              <form onSubmit={handleLogin} className="mt-6 space-y-4">
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="mb-1 block text-sm font-medium text-[var(--color-ink)]"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    autoComplete="email"
+                    className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="senha"
+                    className="mb-1 block text-sm font-medium text-[var(--color-ink)]"
+                  >
+                    Senha
+                  </label>
+                  <input
+                    id="senha"
+                    type="password"
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
+                    required
+                    autoComplete="current-password"
+                    className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
+                  />
+                </div>
+
+                {erro && <p className="text-sm text-red-600">{erro}</p>}
+
+                <button
+                  type="submit"
+                  disabled={carregando}
+                  className="w-full rounded-lg bg-[var(--color-royal)] px-4 py-3 text-base font-medium text-white transition-colors hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
+                >
+                  {carregando ? "Entrando..." : "Entrar"}
+                </button>
+              </form>
 
               <button
-                type="submit"
-                disabled={carregando}
-                className="w-full rounded-lg bg-gray-900 px-4 py-3 text-base font-medium text-white disabled:opacity-50"
+                type="button"
+                onClick={() => setModoReenvio(true)}
+                className="mt-4 w-full text-center text-sm text-[var(--color-ink-soft)] underline"
               >
-                {carregando ? "Entrando..." : "Entrar"}
+                Esqueci a senha ou não recebi meu acesso
               </button>
-            </form>
-
-            <button
-              type="button"
-              onClick={() => setModoReenvio(true)}
-              className="mt-4 w-full text-center text-sm text-gray-600 underline"
-            >
-              Esqueci a senha ou não recebi meu acesso
-            </button>
-          </>
-        ) : (
-          <ReenviarAcesso onVoltar={() => setModoReenvio(false)} />
-        )}
+            </>
+          ) : (
+            <ReenviarAcesso onVoltar={() => setModoReenvio(false)} />
+          )}
+        </div>
       </div>
     </main>
   );
@@ -133,14 +179,17 @@ function ReenviarAcesso({ onVoltar }: { onVoltar: () => void }) {
   }
 
   return (
-    <form onSubmit={handleReenviar} className="space-y-4">
-      <p className="text-sm text-gray-600">
+    <form onSubmit={handleReenviar} className="mt-6 space-y-4">
+      <p className="text-sm text-[var(--color-ink-soft)]">
         Informe seu email. Se houver acesso pendente ou conta cadastrada,
         enviaremos as instruções.
       </p>
 
       <div>
-        <label htmlFor="email-reenvio" className="mb-1 block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="email-reenvio"
+          className="mb-1 block text-sm font-medium text-[var(--color-ink)]"
+        >
           Email
         </label>
         <input
@@ -149,7 +198,7 @@ function ReenviarAcesso({ onVoltar }: { onVoltar: () => void }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
+          className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
         />
       </div>
 
@@ -158,7 +207,7 @@ function ReenviarAcesso({ onVoltar }: { onVoltar: () => void }) {
       <button
         type="submit"
         disabled={carregando}
-        className="w-full rounded-lg bg-gray-900 px-4 py-3 text-base font-medium text-white disabled:opacity-50"
+        className="w-full rounded-lg bg-[var(--color-royal)] px-4 py-3 text-base font-medium text-white transition-colors hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
       >
         {carregando ? "Enviando..." : "Enviar"}
       </button>
@@ -166,7 +215,7 @@ function ReenviarAcesso({ onVoltar }: { onVoltar: () => void }) {
       <button
         type="button"
         onClick={onVoltar}
-        className="w-full text-center text-sm text-gray-600 underline"
+        className="w-full text-center text-sm text-[var(--color-ink-soft)] underline"
       >
         Voltar para o login
       </button>

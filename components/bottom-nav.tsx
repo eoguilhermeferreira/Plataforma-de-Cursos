@@ -2,31 +2,32 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IconInicio, IconProva, IconConta } from "@/components/icons";
 
 const ITENS = [
-  { href: "/", label: "Cursos" },
-  { href: "/provas", label: "Provas" },
-  { href: "/conta", label: "Conta" },
+  { href: "/", label: "Cursos", Icon: IconInicio },
+  { href: "/provas", label: "Provas", Icon: IconProva },
+  { href: "/conta", label: "Conta", Icon: IconConta },
 ];
 
 export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-10 border-t border-gray-200 bg-white pb-[env(safe-area-inset-bottom)]">
+    <nav className="fixed inset-x-0 bottom-0 z-10 border-t border-[var(--color-line)] bg-white pb-[env(safe-area-inset-bottom)] md:hidden">
       <ul className="flex">
-        {ITENS.map((item) => {
-          const ativo =
-            item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+        {ITENS.map(({ href, label, Icon }) => {
+          const ativo = href === "/" ? pathname === "/" : pathname.startsWith(href);
           return (
-            <li key={item.href} className="flex-1">
+            <li key={href} className="flex-1">
               <Link
-                href={item.href}
+                href={href}
                 className={`flex flex-col items-center gap-1 py-3 text-xs font-medium ${
-                  ativo ? "text-gray-900" : "text-gray-400"
+                  ativo ? "text-[var(--color-royal)]" : "text-[var(--color-ink-soft)]"
                 }`}
               >
-                {item.label}
+                <Icon className="h-5 w-5" />
+                {label}
               </Link>
             </li>
           );

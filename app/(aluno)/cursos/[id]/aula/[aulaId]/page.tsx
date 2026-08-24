@@ -37,12 +37,17 @@ export default async function AulaPage({
     .maybeSingle();
 
   return (
-    <div className="px-4 py-6">
-      <Link href={`/cursos/${cursoId}`} className="text-xs text-gray-500 underline">
+    <div className="px-4 py-6 md:px-10 md:py-8">
+      <Link
+        href={`/cursos/${cursoId}`}
+        className="text-xs text-[var(--color-ink-soft)] underline"
+      >
         ← Voltar para o curso
       </Link>
 
-      <h1 className="mt-2 text-xl font-semibold text-gray-900">{aula.titulo}</h1>
+      <h1 className="mt-2 font-display text-2xl font-semibold text-[var(--color-ink)]">
+        {aula.titulo}
+      </h1>
 
       <LeitorAula
         aulaId={aula.id}

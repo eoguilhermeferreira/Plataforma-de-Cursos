@@ -87,9 +87,9 @@ export function AulasEditor({
   }
 
   return (
-    <section className="rounded-lg border border-gray-200 bg-white p-4">
-      <h2 className="text-base font-semibold text-gray-900">Aulas</h2>
-      <p className="mt-1 text-xs text-gray-500">
+    <section className="rounded-lg border border-[var(--color-line)] bg-white p-4">
+      <h2 className="text-base font-semibold text-[var(--color-ink)]">Aulas</h2>
+      <p className="mt-1 text-xs text-[var(--color-ink-soft)]">
         Arraste pelo ⠿ para reordenar.
       </p>
 
@@ -105,7 +105,7 @@ export function AulasEditor({
             }}
             onDragOver={(e) => e.preventDefault()}
             onDrop={() => handleDrop(index)}
-            className="rounded-lg border border-gray-200 bg-gray-50 p-3"
+            className="rounded-lg border border-[var(--color-line)] bg-gray-50 p-3"
           >
             <div className="flex items-start gap-2">
               <span
@@ -125,10 +125,10 @@ export function AulasEditor({
                       atualizarAula(aula.id, { titulo: valor });
                     }
                   }}
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-900 focus:border-gray-900 focus:outline-none"
+                  className="w-full rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm font-medium text-[var(--color-ink)] focus:border-[var(--color-royal)] focus:outline-none"
                 />
 
-                <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                <div className="flex flex-wrap items-center gap-2 text-xs text-[var(--color-ink-soft)]">
                   <label className="flex items-center gap-1">
                     Tempo mínimo (s)
                     <input
@@ -147,7 +147,7 @@ export function AulasEditor({
                           });
                         }
                       }}
-                      className="w-20 rounded border border-gray-300 px-2 py-1"
+                      className="w-20 rounded border border-[var(--color-line)] px-2 py-1"
                     />
                   </label>
                   <span>versão {aula.versao}</span>
@@ -168,7 +168,7 @@ export function AulasEditor({
                     {aula.publicado ? "Publicada" : "Rascunho"}
                   </button>
 
-                  <label className="cursor-pointer rounded-lg border border-gray-300 px-2 py-1 text-xs font-medium text-gray-700">
+                  <label className="cursor-pointer rounded-lg border border-[var(--color-line)] px-2 py-1 text-xs font-medium text-[var(--color-ink)]">
                     Substituir PDF
                     <input
                       type="file"
@@ -188,7 +188,7 @@ export function AulasEditor({
         ))}
 
         {aulas.length === 0 && (
-          <li className="text-sm text-gray-500">Nenhuma aula criada ainda.</li>
+          <li className="text-sm text-[var(--color-ink-soft)]">Nenhuma aula criada ainda.</li>
         )}
       </ul>
 
@@ -247,9 +247,9 @@ function NovaAulaForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-4 space-y-3 rounded-lg border border-dashed border-gray-300 p-3"
+      className="mt-4 space-y-3 rounded-lg border border-dashed border-[var(--color-line)] p-3"
     >
-      <p className="text-sm font-medium text-gray-900">Nova aula</p>
+      <p className="text-sm font-medium text-[var(--color-ink)]">Nova aula</p>
 
       <input
         type="text"
@@ -257,18 +257,18 @@ function NovaAulaForm({
         value={titulo}
         onChange={(e) => setTitulo(e.target.value)}
         required
-        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+        className="w-full rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm focus:border-[var(--color-royal)] focus:outline-none"
       />
 
       <div className="flex items-center gap-2">
-        <label className="flex items-center gap-1 text-xs text-gray-600">
+        <label className="flex items-center gap-1 text-xs text-[var(--color-ink-soft)]">
           Tempo mínimo (s)
           <input
             type="number"
             min={0}
             value={tempoMinimo}
             onChange={(e) => setTempoMinimo(Number(e.target.value))}
-            className="w-20 rounded border border-gray-300 px-2 py-1"
+            className="w-20 rounded border border-[var(--color-line)] px-2 py-1"
           />
         </label>
       </div>
@@ -277,7 +277,7 @@ function NovaAulaForm({
         type="file"
         accept="application/pdf"
         onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-        className="block w-full text-sm text-gray-700"
+        className="block w-full text-sm text-[var(--color-ink)]"
       />
 
       {erro && <p className="text-sm text-red-600">{erro}</p>}
@@ -285,7 +285,7 @@ function NovaAulaForm({
       <button
         type="submit"
         disabled={enviando}
-        className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+        className="rounded-lg bg-[var(--color-royal)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
       >
         {enviando ? "Enviando..." : "Adicionar aula"}
       </button>

@@ -36,12 +36,14 @@ export default async function ProvaHubPage({
 
   if (!exam) {
     return (
-      <div className="px-4 py-6">
-        <Link href="/provas" className="text-xs text-gray-500 underline">
+      <div className="px-4 py-6 md:px-10 md:py-8">
+        <Link href="/provas" className="text-xs text-[var(--color-ink-soft)] underline">
           ← Voltar
         </Link>
-        <h1 className="mt-2 text-xl font-semibold text-gray-900">{curso.titulo}</h1>
-        <p className="mt-4 text-sm text-gray-500">
+        <h1 className="mt-2 font-display text-2xl font-semibold text-[var(--color-ink)]">
+          {curso.titulo}
+        </h1>
+        <p className="mt-4 text-sm text-[var(--color-ink-soft)]">
           Todas as aulas concluídas! A prova ainda não foi publicada — volte em
           breve.
         </p>
@@ -64,19 +66,23 @@ export default async function ProvaHubPage({
     exam.tentativas_max + (grants?.length ?? 0) - enviadas.length;
 
   return (
-    <div className="px-4 py-6">
-      <Link href="/provas" className="text-xs text-gray-500 underline">
+    <div className="px-4 py-6 md:px-10 md:py-8">
+      <Link href="/provas" className="text-xs text-[var(--color-ink-soft)] underline">
         ← Voltar
       </Link>
 
-      <h1 className="mt-2 text-xl font-semibold text-gray-900">{exam.titulo}</h1>
+      <h1 className="mt-2 font-display text-2xl font-semibold text-[var(--color-ink)]">
+        {exam.titulo}
+      </h1>
 
       {emAndamento ? (
-        <div className="mt-4 rounded-lg border border-gray-200 bg-white p-4">
-          <p className="text-sm text-gray-600">Você tem uma prova em andamento.</p>
+        <div className="mt-4 rounded-xl border border-[var(--color-line)] bg-white p-4">
+          <p className="text-sm text-[var(--color-ink-soft)]">
+            Você tem uma prova em andamento.
+          </p>
           <Link
             href={`/provas/${cursoId}/responder`}
-            className="mt-3 block w-full rounded-lg bg-gray-900 px-4 py-3 text-center text-sm font-medium text-white"
+            className="mt-3 block w-full rounded-lg bg-[var(--color-royal)] px-4 py-3 text-center text-sm font-medium text-white hover:bg-[var(--color-royal-dark)]"
           >
             Continuar prova
           </Link>
@@ -84,8 +90,8 @@ export default async function ProvaHubPage({
       ) : (
         <div className="mt-4 space-y-4">
           {ultimaEnviada && (
-            <div className="rounded-lg border border-gray-200 bg-white p-4">
-              <p className="text-sm text-gray-600">
+            <div className="rounded-xl border border-[var(--color-line)] bg-white p-4">
+              <p className="text-sm text-[var(--color-ink-soft)]">
                 {ultimaEnviada.status === "aguardando_correcao"
                   ? "Sua última tentativa está em correção."
                   : ultimaEnviada.aprovado
@@ -94,7 +100,7 @@ export default async function ProvaHubPage({
               </p>
               <Link
                 href={`/provas/${cursoId}/resultado`}
-                className="mt-3 block w-full rounded-lg border border-gray-300 px-4 py-3 text-center text-sm font-medium text-gray-700"
+                className="mt-3 block w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-center text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]"
               >
                 Ver resultado
               </Link>
@@ -106,7 +112,7 @@ export default async function ProvaHubPage({
           ) : (
             ultimaEnviada &&
             !ultimaEnviada.aprovado && (
-              <p className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+              <p className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
                 Fale com o administrador para liberar uma nova tentativa.
               </p>
             )

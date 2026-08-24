@@ -69,13 +69,13 @@ function DefinirSenhaForm() {
 
   return (
     <CentroTela>
-      <h1 className="mb-6 text-center text-xl font-semibold text-gray-900">
+      <h1 className="mb-6 text-center font-display text-xl font-semibold text-[var(--color-ink)]">
         Defina sua senha
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="senha" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="senha" className="mb-1 block text-sm font-medium text-[var(--color-ink)]">
             Senha
           </label>
           <input
@@ -85,12 +85,12 @@ function DefinirSenhaForm() {
             onChange={(e) => setSenha(e.target.value)}
             minLength={8}
             required
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
+            className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
           />
         </div>
 
         <div>
-          <label htmlFor="confirmacao" className="mb-1 block text-sm font-medium text-gray-700">
+          <label htmlFor="confirmacao" className="mb-1 block text-sm font-medium text-[var(--color-ink)]">
             Confirme a senha
           </label>
           <input
@@ -100,7 +100,7 @@ function DefinirSenhaForm() {
             onChange={(e) => setConfirmacao(e.target.value)}
             minLength={8}
             required
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none"
+            className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none"
           />
         </div>
 
@@ -109,7 +109,7 @@ function DefinirSenhaForm() {
         <button
           type="submit"
           disabled={carregando}
-          className="w-full rounded-lg bg-gray-900 px-4 py-3 text-base font-medium text-white disabled:opacity-50"
+          className="w-full rounded-lg bg-[var(--color-royal)] px-4 py-3 text-base font-medium text-white hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
         >
           {carregando ? "Salvando..." : "Salvar e entrar"}
         </button>

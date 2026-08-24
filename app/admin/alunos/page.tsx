@@ -21,22 +21,24 @@ export default async function AlunosPage() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-gray-900">Alunos</h1>
+        <h1 className="font-display text-xl font-semibold text-[var(--color-ink)]">
+          Alunos
+        </h1>
         <ConvidarAlunoModal />
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-lg border border-gray-200 bg-white">
-        <ul className="divide-y divide-gray-200">
+      <div className="mt-6 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white">
+        <ul className="divide-y divide-[var(--color-line)]">
           {alunos.map((aluno) => (
             <li
               key={aluno.email}
               className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
-                <p className="text-sm font-medium text-gray-900">
+                <p className="text-sm font-medium text-[var(--color-ink)]">
                   {aluno.nome || aluno.email}
                 </p>
-                <p className="text-xs text-gray-500">{aluno.email}</p>
+                <p className="text-xs text-[var(--color-ink-soft)]">{aluno.email}</p>
                 {aluno.papel && (
                   <p className="text-xs text-gray-400">
                     {aluno.papel}
@@ -66,7 +68,7 @@ export default async function AlunosPage() {
           ))}
 
           {alunos.length === 0 && (
-            <li className="p-4 text-sm text-gray-500">
+            <li className="p-4 text-sm text-[var(--color-ink-soft)]">
               Nenhum aluno convidado ainda.
             </li>
           )}

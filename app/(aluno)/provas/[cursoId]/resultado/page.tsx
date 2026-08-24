@@ -33,13 +33,15 @@ export default async function ResultadoProvaPage({
   const erradas = questoes.filter((q) => q.correta === false);
 
   return (
-    <div className="px-4 py-6">
-      <Link href="/provas" className="text-xs text-gray-500 underline">
+    <div className="px-4 py-6 md:px-10 md:py-8">
+      <Link href="/provas" className="text-xs text-[var(--color-ink-soft)] underline">
         ← Voltar
       </Link>
 
-      <h1 className="mt-2 text-xl font-semibold text-gray-900">{exam.titulo}</h1>
-      <p className="mt-1 text-xs text-gray-500">
+      <h1 className="mt-2 font-display text-2xl font-semibold text-[var(--color-ink)]">
+        {exam.titulo}
+      </h1>
+      <p className="mt-1 text-xs text-[var(--color-ink-soft)]">
         Enviada em{" "}
         {attempt.enviado_em &&
           new Date(attempt.enviado_em).toLocaleString("pt-BR", {
@@ -49,7 +51,7 @@ export default async function ResultadoProvaPage({
       </p>
 
       {emCorrecao ? (
-        <div className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
+        <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4">
           <p className="text-sm font-medium text-amber-800">Em correção</p>
           <p className="mt-1 text-sm text-amber-700">
             Esta prova tem questão discursiva e está aguardando correção manual.
@@ -57,13 +59,15 @@ export default async function ResultadoProvaPage({
           </p>
         </div>
       ) : (
-        <div className="mt-6 rounded-lg border border-gray-200 bg-white p-4">
+        <div className="mt-6 rounded-xl border border-[var(--color-line)] bg-white p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-3xl font-semibold text-gray-900">
+              <p className="font-display text-3xl font-semibold text-[var(--color-ink)]">
                 {attempt.nota_final?.toFixed(0)}%
               </p>
-              <p className="text-sm text-gray-500">Nota mínima: {exam.nota_minima}%</p>
+              <p className="text-sm text-[var(--color-ink-soft)]">
+                Nota mínima: {exam.nota_minima}%
+              </p>
             </div>
             <span
               className={`rounded-full px-3 py-1 text-sm font-medium ${
@@ -86,19 +90,19 @@ export default async function ResultadoProvaPage({
 
       {!emCorrecao && erradas.length > 0 && (
         <div className="mt-6">
-          <h2 className="text-base font-semibold text-gray-900">
+          <h2 className="font-display text-base font-semibold text-[var(--color-ink)]">
             Questões que você errou
           </h2>
           <ul className="mt-3 space-y-3">
             {erradas.map((questao) => (
               <li
                 key={questao.id}
-                className="rounded-lg border border-gray-200 bg-white p-4"
+                className="rounded-xl border border-[var(--color-line)] bg-white p-4"
               >
-                <p className="text-sm font-medium text-gray-900">
+                <p className="text-sm font-medium text-[var(--color-ink)]">
                   Questão {questao.ordem + 1}
                 </p>
-                <p className="mt-1 whitespace-pre-line text-sm text-gray-700">
+                <p className="mt-1 whitespace-pre-line text-sm text-[var(--color-ink-soft)]">
                   {questao.enunciado}
                 </p>
 
@@ -112,7 +116,7 @@ export default async function ResultadoProvaPage({
                             ? "border-green-300 bg-green-50 text-green-800"
                             : opcao.escolhida
                               ? "border-red-300 bg-red-50 text-red-800"
-                              : "border-gray-200 text-gray-600"
+                              : "border-[var(--color-line)] text-[var(--color-ink-soft)]"
                         }`}
                       >
                         {opcao.texto}
@@ -122,11 +126,11 @@ export default async function ResultadoProvaPage({
                     ))}
                   </ul>
                 ) : (
-                  <p className="mt-2 text-xs text-gray-500">
+                  <p className="mt-2 text-xs text-[var(--color-ink-soft)]">
                     Você errou esta questão.{" "}
                     <Link
                       href={`/cursos/${cursoId}`}
-                      className="underline text-gray-700"
+                      className="underline text-[var(--color-royal)]"
                     >
                       Revisar material da aula
                     </Link>

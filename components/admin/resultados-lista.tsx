@@ -49,7 +49,7 @@ export function ResultadosLista({
           placeholder="Buscar por nome ou email"
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
-          className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-gray-900 focus:outline-none"
+          className="flex-1 rounded-lg border border-[var(--color-line)] px-4 py-2 text-sm focus:border-[var(--color-royal)] focus:outline-none"
         />
         <div className="flex gap-2">
           {(["todos", "aprovado", "reprovado"] as const).map((opcao) => (
@@ -59,8 +59,8 @@ export function ResultadosLista({
               onClick={() => setFiltro(opcao)}
               className={`rounded-lg px-3 py-2 text-xs font-medium ${
                 filtro === opcao
-                  ? "bg-gray-900 text-white"
-                  : "border border-gray-300 text-gray-700"
+                  ? "bg-[var(--color-royal)] text-white"
+                  : "border border-[var(--color-line)] text-[var(--color-ink)]"
               }`}
             >
               {opcao === "todos" ? "Todos" : opcao === "aprovado" ? "Aprovados" : "Reprovados"}
@@ -69,18 +69,18 @@ export function ResultadosLista({
         </div>
       </div>
 
-      <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white">
-        <ul className="divide-y divide-gray-200">
+      <div className="mt-4 overflow-hidden rounded-lg border border-[var(--color-line)] bg-white">
+        <ul className="divide-y divide-[var(--color-line)]">
           {filtradas.map((linha) => (
             <li
               key={linha.attemptId}
               className="flex flex-col gap-2 p-4 sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
-                <p className="text-sm font-medium text-gray-900">
+                <p className="text-sm font-medium text-[var(--color-ink)]">
                   {linha.nome || linha.email}
                 </p>
-                <p className="text-xs text-gray-500">{linha.email}</p>
+                <p className="text-xs text-[var(--color-ink-soft)]">{linha.email}</p>
                 <p className="text-xs text-gray-400">
                   {new Date(linha.enviadoEm).toLocaleString("pt-BR", {
                     dateStyle: "short",
@@ -96,7 +96,7 @@ export function ResultadosLista({
                   </span>
                 ) : (
                   <>
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm text-[var(--color-ink-soft)]">
                       {linha.notaFinal?.toFixed(0)}%
                     </span>
                     <span
@@ -113,7 +113,7 @@ export function ResultadosLista({
 
                 <Link
                   href={`/admin/provas/${examId}/resultados/${linha.attemptId}`}
-                  className="text-xs font-medium text-gray-700 underline"
+                  className="text-xs font-medium text-[var(--color-ink)] underline"
                 >
                   Ver
                 </Link>
@@ -122,7 +122,7 @@ export function ResultadosLista({
                   <button
                     type="button"
                     onClick={() => setLiberarPara(linha)}
-                    className="text-xs font-medium text-gray-700 underline"
+                    className="text-xs font-medium text-[var(--color-ink)] underline"
                   >
                     Liberar nova tentativa
                   </button>
@@ -132,7 +132,7 @@ export function ResultadosLista({
           ))}
 
           {filtradas.length === 0 && (
-            <li className="p-4 text-sm text-gray-500">Nenhuma tentativa encontrada.</li>
+            <li className="p-4 text-sm text-[var(--color-ink-soft)]">Nenhuma tentativa encontrada.</li>
           )}
         </ul>
       </div>

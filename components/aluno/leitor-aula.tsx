@@ -128,13 +128,13 @@ export function LeitorAula({
       <iframe
         src={`/api/aulas/${aulaId}/arquivo`}
         title="Material da aula"
-        className="h-[65vh] w-full rounded-lg border border-gray-200 bg-gray-50"
+        className="h-[65vh] w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-royal-soft)]"
       />
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row">
         <a
           href={`/api/aulas/${aulaId}/arquivo?download=1`}
-          className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-center text-sm font-medium text-gray-700"
+          className="flex-1 rounded-lg border border-[var(--color-line)] px-4 py-3 text-center text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]"
         >
           Baixar PDF
         </a>
@@ -143,7 +143,7 @@ export function LeitorAula({
           type="button"
           onClick={handleConcluir}
           disabled={concluida || !podeConcluir || enviando}
-          className="flex-1 rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
+          className="flex-1 rounded-lg bg-[var(--color-royal)] px-4 py-3 text-sm font-medium text-white hover:bg-[var(--color-royal-dark)] disabled:opacity-50 disabled:hover:bg-[var(--color-royal)]"
         >
           {concluida
             ? "Aula concluída"

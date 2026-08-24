@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { IconCursos, IconAlunos, IconLivro, IconSair } from "@/components/icons";
+import { LogoutButton } from "@/components/logout-button";
 
 export default async function AdminLayout({
   children,
@@ -27,24 +29,45 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen">
-      <header className="border-b border-gray-200 bg-white px-4 py-3">
-        <div className="mx-auto flex max-w-4xl items-center justify-between">
-          <span className="text-base font-semibold text-gray-900">Admin</span>
-          <nav className="flex gap-4 text-sm">
-            <Link href="/admin/cursos" className="text-gray-600 hover:text-gray-900">
-              Cursos
+    <div className="min-h-screen bg-[var(--color-royal-soft)]">
+      <header className="bg-[var(--color-royal-deep)]">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-8">
+          <div className="flex items-center gap-2">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-royal)] text-white">
+              <IconLivro className="h-4 w-4" />
+            </span>
+            <span className="font-display text-sm font-semibold text-white">
+              Painel administrativo
+            </span>
+          </div>
+
+          <nav className="flex items-center gap-1">
+            <Link
+              href="/admin/cursos"
+              className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-[#B9C2F0] hover:bg-white/10 hover:text-white"
+            >
+              <IconCursos className="h-4 w-4" />
+              <span className="hidden sm:inline">Cursos</span>
             </Link>
-            <Link href="/admin/alunos" className="text-gray-600 hover:text-gray-900">
-              Alunos
+            <Link
+              href="/admin/alunos"
+              className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-[#B9C2F0] hover:bg-white/10 hover:text-white"
+            >
+              <IconAlunos className="h-4 w-4" />
+              <span className="hidden sm:inline">Alunos</span>
             </Link>
-            <Link href="/" className="text-gray-600 hover:text-gray-900">
-              Sair do admin
-            </Link>
+            <LogoutButton
+              icon={<IconSair className="h-4 w-4" />}
+              className="ml-1 flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-white hover:bg-white/10"
+            />
           </nav>
         </div>
       </header>
-      <main className="mx-auto max-w-4xl px-4 py-6">{children}</main>
+      <main className="mx-auto max-w-5xl px-4 py-8 md:px-8">
+        <div className="rounded-2xl border border-[var(--color-line)] bg-white p-5 md:p-8">
+          {children}
+        </div>
+      </main>
     </div>
   );
 }

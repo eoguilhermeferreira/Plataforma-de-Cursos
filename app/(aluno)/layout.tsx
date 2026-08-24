@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { BottomNav } from "@/components/bottom-nav";
+import { Sidebar } from "@/components/sidebar";
 
 export default async function AlunoLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -8,10 +9,12 @@ export default async function AlunoLayout({ children }: { children: React.ReactN
     data: { user },
   } = await supabase.auth.getUser();
 
+  let nome: string | null = null;
+
   if (user) {
     const { data: profile } = await supabase
       .from("profiles")
-      .select("papel")
+      .select("papel, nome")
       .eq("id", user.id)
       .single();
 
@@ -20,11 +23,14 @@ export default async function AlunoLayout({ children }: { children: React.ReactN
     if (profile?.papel === "admin") {
       redirect("/admin");
     }
+
+    nome = profile?.nome ?? null;
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <main className="flex-1 pb-20">{children}</main>
+    <div className="flex min-h-screen flex-col bg-white md:flex-row">
+      <Sidebar nome={nome} email={user?.email ?? null} />
+      <main className="flex-1 pb-20 md:ml-64 md:pb-0">{children}</main>
       <BottomNav />
     </div>
   );

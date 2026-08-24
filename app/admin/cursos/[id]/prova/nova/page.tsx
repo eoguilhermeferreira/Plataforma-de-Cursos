@@ -12,13 +12,13 @@ export default async function NovaProvaPage({
     <div>
       <Link
         href={`/admin/cursos/${courseId}`}
-        className="text-xs text-gray-500 underline"
+        className="text-xs text-[var(--color-ink-soft)] underline"
       >
         ← Voltar para o curso
       </Link>
 
-      <h1 className="mt-2 text-xl font-semibold text-gray-900">Nova prova</h1>
-      <p className="mt-1 text-sm text-gray-500">
+      <h1 className="mt-2 text-xl font-semibold text-[var(--color-ink)]">Nova prova</h1>
+      <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
         Cole abaixo o texto da prova (questões numeradas, alternativas e o bloco
         GABARITO no final). O sistema interpreta e monta o formulário — nada é
         publicado agora, a próxima tela é de revisão.

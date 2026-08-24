@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-royal: #2942e0;
+  --color-royal-dark: #1c2fae;
+  --color-royal-deep: #0e1650;
+  --color-royal-soft: #eef1fd;
+  --color-royal-soft-hover: #e2e7fb;
+  --color-ink: #10132a;
+  --color-ink-soft: #565b7a;
+  --color-paper: #ffffff;
+  --color-line: #e4e8f7;
+
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-royal: var(--color-royal);
+  --color-royal-dark: var(--color-royal-dark);
+  --color-royal-deep: var(--color-royal-deep);
+  --color-royal-soft: var(--color-royal-soft);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-line: var(--color-line);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-sora);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+/*
+ * Card com identidade de ebook: uma "lombada" colorida na borda esquerda e
+ * uma pilha de páginas sugerida atrás (duas bordas deslocadas), em vez de
+ * um card genérico de thumbnail de vídeo.
+ */
+.book-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.book-card::before,
+.book-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  z-index: -1;
+}
+
+.book-card::before {
+  transform: translate(3px, 3px);
+}
+
+.book-card::after {
+  transform: translate(6px, 6px);
+  opacity: 0.6;
+}
+
+.book-spine {
+  background: linear-gradient(180deg, var(--color-royal) 0%, var(--color-royal-dark) 100%);
 }

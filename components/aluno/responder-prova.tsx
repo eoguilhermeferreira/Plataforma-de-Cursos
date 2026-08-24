@@ -93,14 +93,16 @@ export function ResponderProva({
 
   if (conferencia) {
     return (
-      <div className="px-4 py-6">
-        <h1 className="text-xl font-semibold text-gray-900">Conferência</h1>
-        <p className="mt-1 text-sm text-gray-500">
+      <div className="px-4 py-6 md:px-10 md:py-8">
+        <h1 className="font-display text-2xl font-semibold text-[var(--color-ink)]">
+          Conferência
+        </h1>
+        <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
           {respondidas} de {questoes.length} questões respondidas.
         </p>
 
         {semResposta.length > 0 && (
-          <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
+          <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
             <p className="text-sm font-medium text-amber-800">
               Questões sem resposta:
             </p>
@@ -129,7 +131,7 @@ export function ResponderProva({
           <button
             type="button"
             onClick={() => setConferencia(false)}
-            className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-sm font-medium text-gray-700"
+            className="flex-1 rounded-lg border border-[var(--color-line)] px-4 py-3 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]"
           >
             Voltar às questões
           </button>
@@ -137,7 +139,7 @@ export function ResponderProva({
             type="button"
             onClick={enviarProva}
             disabled={enviando}
-            className="flex-1 rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
+            className="flex-1 rounded-lg bg-[var(--color-royal)] px-4 py-3 text-sm font-medium text-white hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
           >
             {enviando ? "Enviando..." : "Enviar prova"}
           </button>
@@ -149,14 +151,16 @@ export function ResponderProva({
   const resposta = respostas[questao.id];
 
   return (
-    <div className="px-4 py-6">
-      <h1 className="text-lg font-semibold text-gray-900">{tituloProva}</h1>
-      <p className="mt-1 text-sm text-gray-500">
+    <div className="px-4 py-6 md:px-10 md:py-8">
+      <h1 className="font-display text-lg font-semibold text-[var(--color-ink)]">
+        {tituloProva}
+      </h1>
+      <p className="mt-1 text-sm text-[var(--color-ink-soft)]">
         Questão {indice + 1} de {questoes.length}
       </p>
-      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-gray-100">
+      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-[var(--color-royal-soft)]">
         <div
-          className="h-full rounded-full bg-gray-900"
+          className="h-full rounded-full bg-[var(--color-royal)]"
           style={{ width: `${((indice + 1) / questoes.length) * 100}%` }}
         />
       </div>
@@ -169,10 +173,10 @@ export function ResponderProva({
             onClick={() => setIndice(i)}
             className={`h-8 w-8 shrink-0 rounded-full text-xs font-medium ${
               i === indice
-                ? "bg-gray-900 text-white"
+                ? "bg-[var(--color-royal)] text-white"
                 : temResposta(respostas[q.id])
                   ? "bg-green-100 text-green-800"
-                  : "bg-gray-100 text-gray-500"
+                  : "bg-gray-100 text-[var(--color-ink-soft)]"
             }`}
           >
             {i + 1}
@@ -180,8 +184,8 @@ export function ResponderProva({
         ))}
       </div>
 
-      <div className="mt-6 rounded-lg border border-gray-200 bg-white p-4">
-        <p className="whitespace-pre-line text-base text-gray-900">
+      <div className="mt-6 rounded-xl border border-[var(--color-line)] bg-white p-4">
+        <p className="whitespace-pre-line text-base text-[var(--color-ink)]">
           {questao.enunciado}
         </p>
 
@@ -201,7 +205,7 @@ export function ResponderProva({
               })
             }
             rows={6}
-            className="mt-4 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+            className="mt-4 w-full rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm focus:border-[var(--color-royal)] focus:outline-none"
           />
         ) : (
           <div className="mt-4 space-y-2">
@@ -210,8 +214,8 @@ export function ResponderProva({
                 key={opcao.id}
                 className={`flex items-center gap-3 rounded-lg border px-4 py-3 ${
                   resposta?.optionId === opcao.id
-                    ? "border-gray-900 bg-gray-50"
-                    : "border-gray-200"
+                    ? "border-[var(--color-royal)] bg-[var(--color-royal-soft)]"
+                    : "border-[var(--color-line)]"
                 }`}
               >
                 <input
@@ -221,14 +225,15 @@ export function ResponderProva({
                   onChange={() =>
                     salvarResposta(questao.id, { optionId: opcao.id, textoResposta: null })
                   }
+                  className="accent-[var(--color-royal)]"
                 />
-                <span className="text-sm text-gray-900">{opcao.texto}</span>
+                <span className="text-sm text-[var(--color-ink)]">{opcao.texto}</span>
               </label>
             ))}
           </div>
         )}
 
-        <p className="mt-3 h-4 text-xs text-gray-400">
+        <p className="mt-3 h-4 text-xs text-[var(--color-ink-soft)]">
           {salvandoId === questao.id
             ? "Salvando..."
             : salvoId === questao.id
@@ -242,7 +247,7 @@ export function ResponderProva({
           type="button"
           onClick={() => setIndice((i) => Math.max(0, i - 1))}
           disabled={indice === 0}
-          className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-sm font-medium text-gray-700 disabled:opacity-50"
+          className="flex-1 rounded-lg border border-[var(--color-line)] px-4 py-3 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)] disabled:opacity-50"
         >
           Anterior
         </button>
@@ -250,7 +255,7 @@ export function ResponderProva({
           <button
             type="button"
             onClick={() => setIndice((i) => Math.min(questoes.length - 1, i + 1))}
-            className="flex-1 rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white"
+            className="flex-1 rounded-lg bg-[var(--color-royal)] px-4 py-3 text-sm font-medium text-white hover:bg-[var(--color-royal-dark)]"
           >
             Próxima
           </button>
@@ -258,7 +263,7 @@ export function ResponderProva({
           <button
             type="button"
             onClick={() => setConferencia(true)}
-            className="flex-1 rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white"
+            className="flex-1 rounded-lg bg-[var(--color-royal)] px-4 py-3 text-sm font-medium text-white hover:bg-[var(--color-royal-dark)]"
           >
             Revisar e enviar
           </button>

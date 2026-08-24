@@ -70,10 +70,10 @@ export function MatricularAluno({
   }
 
   return (
-    <section className="rounded-lg border border-gray-200 bg-white p-4">
-      <h2 className="text-base font-semibold text-gray-900">Alunos matriculados</h2>
+    <section className="rounded-lg border border-[var(--color-line)] bg-white p-4">
+      <h2 className="text-base font-semibold text-[var(--color-ink)]">Alunos matriculados</h2>
 
-      <ul className="mt-3 divide-y divide-gray-200">
+      <ul className="mt-3 divide-y divide-[var(--color-line)]">
         {matriculas.map((matricula) => {
           const aluno = alunoPorId.get(matricula.user_id);
           return (
@@ -81,7 +81,7 @@ export function MatricularAluno({
               key={matricula.id}
               className="flex items-center justify-between gap-2 py-2"
             >
-              <span className="text-sm text-gray-900">
+              <span className="text-sm text-[var(--color-ink)]">
                 {aluno?.nome || aluno?.email || matricula.user_id}
               </span>
               <span
@@ -94,7 +94,7 @@ export function MatricularAluno({
         })}
 
         {matriculas.length === 0 && (
-          <li className="py-2 text-sm text-gray-500">Nenhum aluno matriculado.</li>
+          <li className="py-2 text-sm text-[var(--color-ink-soft)]">Nenhum aluno matriculado.</li>
         )}
       </ul>
 
@@ -102,7 +102,7 @@ export function MatricularAluno({
         <select
           value={alunoSelecionado}
           onChange={(e) => setAlunoSelecionado(e.target.value)}
-          className="flex-1 rounded-lg border border-gray-300 px-3 py-3 text-sm focus:border-gray-900 focus:outline-none"
+          className="flex-1 rounded-lg border border-[var(--color-line)] px-3 py-3 text-sm focus:border-[var(--color-royal)] focus:outline-none"
         >
           <option value="">Selecione um aluno</option>
           {disponiveis.map((aluno) => (
@@ -114,7 +114,7 @@ export function MatricularAluno({
         <button
           type="submit"
           disabled={!alunoSelecionado || carregando}
-          className="rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
+          className="rounded-lg bg-[var(--color-royal)] px-4 py-3 text-sm font-medium text-white hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
         >
           {carregando ? "Matriculando..." : "Matricular"}
         </button>

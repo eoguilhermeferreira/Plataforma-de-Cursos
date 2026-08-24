@@ -13,26 +13,32 @@ export default async function AdminCursosPage() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-gray-900">Cursos</h1>
+        <h1 className="font-display text-xl font-semibold text-[var(--color-ink)]">
+          Cursos
+        </h1>
         <CriarCursoModal />
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-lg border border-gray-200 bg-white">
-        <ul className="divide-y divide-gray-200">
+      <div className="mt-6 overflow-hidden rounded-xl border border-[var(--color-line)] bg-white">
+        <ul className="divide-y divide-[var(--color-line)]">
           {cursos.map((curso) => (
             <li key={curso.id}>
               <Link
                 href={`/admin/cursos/${curso.id}`}
-                className="flex flex-col gap-2 p-4 sm:flex-row sm:items-center sm:justify-between"
+                className="flex flex-col gap-2 p-4 hover:bg-[var(--color-royal-soft)] sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{curso.titulo}</p>
+                  <p className="text-sm font-medium text-[var(--color-ink)]">
+                    {curso.titulo}
+                  </p>
                   {curso.descricao && (
-                    <p className="mt-0.5 text-xs text-gray-500">{curso.descricao}</p>
+                    <p className="mt-0.5 text-xs text-[var(--color-ink-soft)]">
+                      {curso.descricao}
+                    </p>
                   )}
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700">
+                  <span className="rounded-full bg-[var(--color-royal-soft)] px-2 py-1 text-xs font-medium text-[var(--color-royal)]">
                     {PUBLICO_LABEL[curso.publico] ?? curso.publico}
                   </span>
                   <span
@@ -50,7 +56,9 @@ export default async function AdminCursosPage() {
           ))}
 
           {cursos.length === 0 && (
-            <li className="p-4 text-sm text-gray-500">Nenhum curso criado ainda.</li>
+            <li className="p-4 text-sm text-[var(--color-ink-soft)]">
+              Nenhum curso criado ainda.
+            </li>
           )}
         </ul>
       </div>

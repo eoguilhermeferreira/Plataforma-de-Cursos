@@ -11,7 +11,7 @@ const STATUS_LABEL: Record<string, string> = {
 
 const STATUS_CLASS: Record<string, string> = {
   nao_iniciada: "bg-gray-100 text-gray-600",
-  em_andamento: "bg-blue-100 text-blue-800",
+  em_andamento: "bg-[var(--color-royal-soft)] text-[var(--color-royal)]",
   concluida: "bg-green-100 text-green-800",
 };
 
@@ -38,10 +38,12 @@ export default async function CursoDetalhePage({
   const { curso, aulas } = dados;
 
   return (
-    <div className="px-4 py-6">
-      <h1 className="text-xl font-semibold text-gray-900">{curso.titulo}</h1>
+    <div className="px-4 py-6 md:px-10 md:py-8">
+      <h1 className="font-display text-2xl font-semibold text-[var(--color-ink)]">
+        {curso.titulo}
+      </h1>
       {curso.descricao && (
-        <p className="mt-1 text-sm text-gray-500">{curso.descricao}</p>
+        <p className="mt-1 text-sm text-[var(--color-ink-soft)]">{curso.descricao}</p>
       )}
 
       <ul className="mt-6 space-y-3">
@@ -49,11 +51,13 @@ export default async function CursoDetalhePage({
           <li key={aula.id}>
             <Link
               href={`/cursos/${curso.id}/aula/${aula.id}`}
-              className="flex items-center justify-between gap-3 rounded-lg border border-gray-200 bg-white p-4"
+              className="flex items-center justify-between gap-3 rounded-xl border border-[var(--color-line)] bg-white p-4 hover:border-[var(--color-royal)]"
             >
               <div>
-                <p className="text-sm font-medium text-gray-900">{aula.titulo}</p>
-                <p className="mt-0.5 text-xs text-gray-500">
+                <p className="text-sm font-medium text-[var(--color-ink)]">
+                  {aula.titulo}
+                </p>
+                <p className="mt-0.5 text-xs text-[var(--color-ink-soft)]">
                   Material versão {aula.versao}
                   {aula.versaoLida !== null && aula.versaoLida < aula.versao && (
                     <span className="ml-1 text-amber-600">
@@ -72,7 +76,7 @@ export default async function CursoDetalhePage({
         ))}
 
         {aulas.length === 0 && (
-          <li className="text-sm text-gray-500">
+          <li className="text-sm text-[var(--color-ink-soft)]">
             Nenhuma aula publicada neste curso ainda.
           </li>
         )}

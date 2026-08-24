@@ -19,23 +19,25 @@ export default async function ContaPage() {
     .single();
 
   return (
-    <div className="px-4 py-6">
-      <h1 className="text-xl font-semibold text-gray-900">Minha conta</h1>
+    <div className="px-4 py-6 md:px-10 md:py-8">
+      <h1 className="font-display text-2xl font-semibold text-[var(--color-ink)]">
+        Minha conta
+      </h1>
 
-      <div className="mt-6 space-y-1 rounded-lg border border-gray-200 bg-white p-4">
-        <p className="text-sm text-gray-500">Email</p>
-        <p className="text-base text-gray-900">{user.email}</p>
-      </div>
-
-      {profile?.nome && (
-        <div className="mt-4 space-y-1 rounded-lg border border-gray-200 bg-white p-4">
-          <p className="text-sm text-gray-500">Nome</p>
-          <p className="text-base text-gray-900">{profile.nome}</p>
+      <div className="mt-6 max-w-md space-y-4">
+        <div className="space-y-1 rounded-xl border border-[var(--color-line)] bg-white p-4">
+          <p className="text-sm text-[var(--color-ink-soft)]">Email</p>
+          <p className="text-base text-[var(--color-ink)]">{user.email}</p>
         </div>
-      )}
 
-      <div className="mt-6">
-        <LogoutButton />
+        {profile?.nome && (
+          <div className="space-y-1 rounded-xl border border-[var(--color-line)] bg-white p-4">
+            <p className="text-sm text-[var(--color-ink-soft)]">Nome</p>
+            <p className="text-base text-[var(--color-ink)]">{profile.nome}</p>
+          </div>
+        )}
+
+        <LogoutButton className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base font-medium text-[var(--color-ink)] hover:bg-[var(--color-royal-soft)]" />
       </div>
     </div>
   );

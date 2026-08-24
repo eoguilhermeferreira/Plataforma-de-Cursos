@@ -236,10 +236,10 @@ export function RevisaoProva({
   return (
     <div className="mt-4 space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-gray-900">
+        <h1 className="text-xl font-semibold text-[var(--color-ink)]">
           {titulo} <span className="text-sm font-normal text-gray-400">v{prova.exam.versao}</span>
         </h1>
-        <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700">
+        <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-[var(--color-ink)]">
           {STATUS_LABEL[prova.exam.status] ?? prova.exam.status}
         </span>
       </div>
@@ -247,7 +247,7 @@ export function RevisaoProva({
       {(prova.exam.status === "publicada" || prova.exam.status === "substituida") && (
         <Link
           href={`/admin/provas/${prova.exam.id}/resultados`}
-          className="block rounded-lg border border-gray-300 px-4 py-3 text-center text-sm font-medium text-gray-700"
+          className="block rounded-lg border border-[var(--color-line)] px-4 py-3 text-center text-sm font-medium text-[var(--color-ink)]"
         >
           Ver resultados
         </Link>
@@ -262,29 +262,29 @@ export function RevisaoProva({
             type="button"
             onClick={criarNovaVersao}
             disabled={criandoVersao || prova.exam.status !== "publicada"}
-            className="mt-3 block rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+            className="mt-3 block rounded-lg bg-[var(--color-royal)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
           >
             {criandoVersao ? "Criando..." : "Criar nova versão"}
           </button>
         </div>
       )}
 
-      <section className="rounded-lg border border-gray-200 bg-white p-4">
-        <h2 className="text-base font-semibold text-gray-900">Configurações</h2>
+      <section className="rounded-lg border border-[var(--color-line)] bg-white p-4">
+        <h2 className="text-base font-semibold text-[var(--color-ink)]">Configurações</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
-            <label className="mb-1 block text-sm font-medium text-gray-700">Título</label>
+            <label className="mb-1 block text-sm font-medium text-[var(--color-ink)]">Título</label>
             <input
               type="text"
               value={titulo}
               onChange={(e) => setTitulo(e.target.value)}
               disabled={!editavel}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none disabled:bg-gray-50 disabled:text-gray-500"
+              className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className="mb-1 block text-sm font-medium text-[var(--color-ink)]">
               Nota mínima (%)
             </label>
             <input
@@ -294,12 +294,12 @@ export function RevisaoProva({
               value={notaMinima}
               onChange={(e) => setNotaMinima(Number(e.target.value))}
               disabled={!editavel}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none disabled:bg-gray-50 disabled:text-gray-500"
+              className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className="mb-1 block text-sm font-medium text-[var(--color-ink)]">
               Tentativas máximas
             </label>
             <input
@@ -308,12 +308,12 @@ export function RevisaoProva({
               value={tentativasMax}
               onChange={(e) => setTentativasMax(Number(e.target.value))}
               disabled={!editavel}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-gray-900 focus:outline-none disabled:bg-gray-50 disabled:text-gray-500"
+              className="w-full rounded-lg border border-[var(--color-line)] px-4 py-3 text-base focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
+            <label className="flex items-center gap-2 text-sm font-medium text-[var(--color-ink)]">
               <input
                 type="checkbox"
                 checked={mostrarGabarito}
@@ -353,9 +353,9 @@ export function RevisaoProva({
 
       <section className="space-y-4">
         {questoes.map((questao, index) => (
-          <div key={index} className="rounded-lg border border-gray-200 bg-white p-4">
+          <div key={index} className="rounded-lg border border-[var(--color-line)] bg-white p-4">
             <div className="flex items-start justify-between gap-2">
-              <span className="text-sm font-semibold text-gray-900">
+              <span className="text-sm font-semibold text-[var(--color-ink)]">
                 Questão {index + 1}
               </span>
               {editavel && (
@@ -374,17 +374,17 @@ export function RevisaoProva({
               onChange={(e) => atualizarQuestao(index, { enunciado: e.target.value })}
               disabled={!editavel}
               rows={3}
-              className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none disabled:bg-gray-50 disabled:text-gray-500"
+              className="mt-2 w-full rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
             />
 
             <div className="mt-3 flex flex-wrap items-center gap-3">
-              <label className="flex items-center gap-1 text-xs text-gray-600">
+              <label className="flex items-center gap-1 text-xs text-[var(--color-ink-soft)]">
                 Tipo
                 <select
                   value={questao.tipo}
                   onChange={(e) => mudarTipo(index, e.target.value as TipoQuestao)}
                   disabled={!editavel}
-                  className="rounded border border-gray-300 px-2 py-1"
+                  className="rounded border border-[var(--color-line)] px-2 py-1"
                 >
                   {Object.entries(TIPO_LABEL).map(([valor, label]) => (
                     <option key={valor} value={valor}>
@@ -394,7 +394,7 @@ export function RevisaoProva({
                 </select>
               </label>
 
-              <label className="flex items-center gap-1 text-xs text-gray-600">
+              <label className="flex items-center gap-1 text-xs text-[var(--color-ink-soft)]">
                 Peso
                 <input
                   type="number"
@@ -405,12 +405,12 @@ export function RevisaoProva({
                     atualizarQuestao(index, { peso: Number(e.target.value) })
                   }
                   disabled={!editavel}
-                  className="w-16 rounded border border-gray-300 px-2 py-1"
+                  className="w-16 rounded border border-[var(--color-line)] px-2 py-1"
                 />
               </label>
 
               {questao.tipo === "objetiva" && (
-                <label className="flex items-center gap-1 text-xs text-gray-600">
+                <label className="flex items-center gap-1 text-xs text-[var(--color-ink-soft)]">
                   <input
                     type="checkbox"
                     checked={questao.embaralhar}
@@ -443,7 +443,7 @@ export function RevisaoProva({
                         atualizarOpcaoTexto(index, opcaoIndex, e.target.value)
                       }
                       disabled={!editavel || questao.tipo === "verdadeiro_falso"}
-                      className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none disabled:bg-gray-50 disabled:text-gray-500"
+                      className="flex-1 rounded-lg border border-[var(--color-line)] px-3 py-2 text-sm focus:border-[var(--color-royal)] focus:outline-none disabled:bg-gray-50 disabled:text-[var(--color-ink-soft)]"
                     />
                     {editavel &&
                       questao.tipo === "objetiva" &&
@@ -463,7 +463,7 @@ export function RevisaoProva({
                   <button
                     type="button"
                     onClick={() => adicionarOpcao(index)}
-                    className="text-xs font-medium text-gray-700 underline"
+                    className="text-xs font-medium text-[var(--color-ink)] underline"
                   >
                     + Adicionar alternativa
                   </button>
@@ -477,7 +477,7 @@ export function RevisaoProva({
           <button
             type="button"
             onClick={adicionarQuestao}
-            className="w-full rounded-lg border border-dashed border-gray-300 px-4 py-3 text-sm font-medium text-gray-700"
+            className="w-full rounded-lg border border-dashed border-[var(--color-line)] px-4 py-3 text-sm font-medium text-[var(--color-ink)]"
           >
             + Adicionar questão
           </button>
@@ -488,12 +488,12 @@ export function RevisaoProva({
       {ok && <p className="text-sm text-green-700">{ok}</p>}
 
       {editavel && (
-        <div className="sticky bottom-20 flex gap-2 rounded-lg border border-gray-200 bg-white p-3 shadow sm:bottom-4">
+        <div className="sticky bottom-20 flex gap-2 rounded-lg border border-[var(--color-line)] bg-white p-3 shadow sm:bottom-4">
           <button
             type="button"
             onClick={salvarRascunho}
             disabled={salvando || publicando}
-            className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-sm font-medium text-gray-700 disabled:opacity-50"
+            className="flex-1 rounded-lg border border-[var(--color-line)] px-4 py-3 text-sm font-medium text-[var(--color-ink)] disabled:opacity-50"
           >
             {salvando ? "Salvando..." : "Salvar rascunho"}
           </button>
@@ -501,7 +501,7 @@ export function RevisaoProva({
             type="button"
             onClick={publicar}
             disabled={bloqueado || salvando || publicando}
-            className="flex-1 rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
+            className="flex-1 rounded-lg bg-[var(--color-royal)] px-4 py-3 text-sm font-medium text-white hover:bg-[var(--color-royal-dark)] disabled:opacity-50"
           >
             {publicando ? "Publicando..." : "Publicar"}
           </button>

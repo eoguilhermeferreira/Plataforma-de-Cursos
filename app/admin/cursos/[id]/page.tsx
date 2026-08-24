@@ -43,11 +43,11 @@ export default async function AdminCursoDetalhePage({
         matriculas={matriculas}
       />
 
-      <section className="rounded-lg border border-gray-200 bg-white p-4">
+      <section className="rounded-lg border border-[var(--color-line)] bg-white p-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-semibold text-gray-900">Prova</h2>
+          <h2 className="text-base font-semibold text-[var(--color-ink)]">Prova</h2>
           {examAtual && (
-            <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700">
+            <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-[var(--color-ink)]">
               {STATUS_LABEL[examAtual.status] ?? examAtual.status} · v{examAtual.versao}
             </span>
           )}
@@ -55,7 +55,7 @@ export default async function AdminCursoDetalhePage({
 
         <Link
           href={`/admin/cursos/${curso.id}/prova`}
-          className="mt-3 block rounded-lg bg-gray-900 px-4 py-3 text-center text-sm font-medium text-white"
+          className="mt-3 block rounded-lg bg-[var(--color-royal)] px-4 py-3 text-center text-sm font-medium text-white"
         >
           {examAtual ? "Ver / revisar prova" : "Criar prova a partir de texto"}
         </Link>

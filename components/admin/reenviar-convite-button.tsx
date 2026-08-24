@@ -54,7 +54,7 @@ export function ReenviarConviteButton({ email }: { email: string }) {
     <button
       onClick={handleClick}
       disabled={carregando}
-      className="text-xs font-medium text-gray-700 underline disabled:opacity-50"
+      className="text-xs font-medium text-[var(--color-ink)] underline disabled:opacity-50"
     >
       {carregando ? "Reenviando..." : erro ? "Erro, tentar de novo" : "Reenviar"}
     </button>

@@ -43,7 +43,7 @@ export function AlterarEmailButton({
     return (
       <button
         onClick={() => setEditando(true)}
-        className="text-xs font-medium text-gray-700 underline"
+        className="text-xs font-medium text-[var(--color-ink)] underline"
       >
         Alterar email
       </button>
@@ -56,7 +56,7 @@ export function AlterarEmailButton({
         type="email"
         value={novoEmail}
         onChange={(e) => setNovoEmail(e.target.value)}
-        className="rounded border border-gray-300 px-2 py-1 text-xs"
+        className="rounded border border-[var(--color-line)] px-2 py-1 text-xs"
       />
       {erro && <p className="text-xs text-red-600">{erro}</p>}
       <div className="flex gap-2">
@@ -73,7 +73,7 @@ export function AlterarEmailButton({
             setNovoEmail(emailAtual);
             setErro(null);
           }}
-          className="text-xs text-gray-500 underline"
+          className="text-xs text-[var(--color-ink-soft)] underline"
         >
           Cancelar
         </button>
