@@ -8,6 +8,7 @@ import {
   IconAnotacao,
   IconLivro,
   IconSair,
+  IconFechar,
 } from "@/components/icons";
 import { LogoutButton } from "@/components/logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -28,14 +29,23 @@ const ITEM_CLASS_INATIVO =
 export function Sidebar({
   nome,
   email,
+  className,
+  onFechar,
 }: {
   nome: string | null;
   email: string | null;
+  className?: string;
+  onFechar?: () => void;
 }) {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col bg-[var(--color-royal-deep)] px-4 py-6 md:flex">
+    <aside
+      className={
+        className ??
+        "fixed inset-y-0 left-0 z-20 hidden w-64 flex-col bg-[var(--color-royal-deep)] px-4 py-6 md:flex"
+      }
+    >
       <div className="flex items-center gap-2 px-2">
         <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-royal)] text-white">
           <IconLivro className="h-5 w-5" />
@@ -43,6 +53,16 @@ export function Sidebar({
         <span className="font-display text-base font-semibold text-white">
           Plataforma
         </span>
+        {onFechar && (
+          <button
+            type="button"
+            onClick={onFechar}
+            aria-label="Recolher menu"
+            className="ml-auto flex h-8 w-8 items-center justify-center rounded-lg text-[#B9C2F0] hover:bg-white/10 hover:text-white"
+          >
+            <IconFechar className="h-4 w-4" />
+          </button>
+        )}
       </div>
 
       <nav className="mt-8 flex-1">
