@@ -62,46 +62,45 @@ export default async function CursosPage() {
                   <li key={curso.id} className="mr-1.5 mb-1.5">
                     <Link
                       href={`/cursos/${curso.id}`}
-                      className="book-card group block rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] p-4 transition-transform hover:-translate-y-0.5"
+                      className="book-card group block rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] transition-transform hover:-translate-y-0.5"
                     >
-                      <div className="flex gap-3">
+                      <div className="aspect-[2/3] w-full overflow-hidden rounded-t-xl">
                         {capaUrl ? (
-                          <span className="aspect-[2/3] w-16 shrink-0 overflow-hidden rounded-md shadow-sm">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={capaUrl}
-                              alt=""
-                              className="h-full w-full object-cover"
-                            />
-                          </span>
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={capaUrl}
+                            alt=""
+                            className="h-full w-full object-cover"
+                          />
                         ) : (
-                          <span className="book-spine flex h-20 w-3 shrink-0 items-start justify-center rounded-sm pt-2">
-                            <IconLivro className="h-3.5 w-3.5 text-white/70" />
-                          </span>
+                          <div className="book-spine flex h-full w-full items-center justify-center">
+                            <IconLivro className="h-10 w-10 text-white/70" />
+                          </div>
                         )}
-                        <div className="min-w-0 flex-1">
-                          <p className="font-display text-sm font-semibold text-[var(--color-ink)]">
-                            {curso.titulo}
-                          </p>
-                          {curso.descricao && (
-                            <p className="mt-1 line-clamp-2 text-xs text-[var(--color-ink-soft)]">
-                              {curso.descricao}
-                            </p>
-                          )}
-                        </div>
                       </div>
 
-                      <div className="mt-4">
-                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-royal-soft)]">
-                          <div
-                            className="h-full rounded-full bg-[var(--color-royal)]"
-                            style={{ width: `${percentual}%` }}
-                          />
-                        </div>
-                        <p className="mt-1.5 text-xs text-[var(--color-ink-soft)]">
-                          {curso.aulasConcluidas} de {curso.totalAulas} aulas ·{" "}
-                          {percentual}%
+                      <div className="p-4">
+                        <p className="font-display text-sm font-semibold text-[var(--color-ink)]">
+                          {curso.titulo}
                         </p>
+                        {curso.descricao && (
+                          <p className="mt-1 line-clamp-2 text-xs text-[var(--color-ink-soft)]">
+                            {curso.descricao}
+                          </p>
+                        )}
+
+                        <div className="mt-4">
+                          <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-royal-soft)]">
+                            <div
+                              className="h-full rounded-full bg-[var(--color-royal)]"
+                              style={{ width: `${percentual}%` }}
+                            />
+                          </div>
+                          <p className="mt-1.5 text-xs text-[var(--color-ink-soft)]">
+                            {curso.aulasConcluidas} de {curso.totalAulas} aulas ·{" "}
+                            {percentual}%
+                          </p>
+                        </div>
                       </div>
                     </Link>
                   </li>
