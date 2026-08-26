@@ -235,11 +235,11 @@ export function RevisaoProva({
 
   return (
     <div className="mt-4 space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-[var(--color-ink)]">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h1 className="min-w-0 break-words text-xl font-semibold text-[var(--color-ink)]">
           {titulo} <span className="text-sm font-normal text-gray-400">v{prova.exam.versao}</span>
         </h1>
-        <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-[var(--color-ink)]">
+        <span className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-[var(--color-ink)]">
           {STATUS_LABEL[prova.exam.status] ?? prova.exam.status}
         </span>
       </div>

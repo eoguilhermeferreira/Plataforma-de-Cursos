@@ -89,7 +89,7 @@ export function ResultadosLista({
                 </p>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 {linha.status === "aguardando_correcao" ? (
                   <span className="rounded-full bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800">
                     Em correção

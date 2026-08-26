@@ -21,11 +21,11 @@ export default async function AlunosPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="font-display text-xl font-semibold text-[var(--color-ink)]">
           Alunos
         </h1>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <CriarContaModal />
           <ConvidarAlunoModal />
         </div>
@@ -38,7 +38,7 @@ export default async function AlunosPage() {
               key={aluno.email}
               className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between"
             >
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm font-medium text-[var(--color-ink)]">
                   {aluno.nome || aluno.email}
                 </p>
@@ -51,7 +51,7 @@ export default async function AlunosPage() {
                 )}
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <span
                   className={`rounded-full px-2 py-1 text-xs font-medium ${STATUS_CLASS[aluno.status]}`}
                 >

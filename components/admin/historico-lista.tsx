@@ -89,7 +89,7 @@ export function HistoricoLista({ linhas }: { linhas: HistoricoLinha[] }) {
                 </p>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm text-[var(--color-ink-soft)]">
                   {linha.notaFinal?.toFixed(0)}%
                 </span>

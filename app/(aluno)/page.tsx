@@ -50,7 +50,7 @@ export default async function CursosPage() {
               </p>
             </div>
           ) : (
-            <ul className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">
               {cursos.map((curso) => {
                 const percentual =
                   curso.totalAulas === 0
@@ -59,12 +59,12 @@ export default async function CursosPage() {
                 const capaUrl = getCapaUrl(curso.capaPath);
 
                 return (
-                  <li key={curso.id} className="mr-1.5 mb-1.5">
+                  <li key={curso.id} className="mr-1 mb-1 sm:mr-1.5 sm:mb-1.5">
                     <Link
                       href={`/cursos/${curso.id}`}
-                      className="book-card group block rounded-xl border border-[var(--color-line)] bg-[var(--color-paper)] transition-transform hover:-translate-y-0.5"
+                      className="book-card group block rounded-lg border border-[var(--color-line)] bg-[var(--color-paper)] transition-transform hover:-translate-y-0.5 sm:rounded-xl"
                     >
-                      <div className="aspect-[2/3] w-full overflow-hidden rounded-t-xl">
+                      <div className="aspect-[2/3] w-full overflow-hidden rounded-t-lg sm:rounded-t-xl">
                         {capaUrl ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
@@ -74,29 +74,29 @@ export default async function CursosPage() {
                           />
                         ) : (
                           <div className="book-spine flex h-full w-full items-center justify-center">
-                            <IconLivro className="h-10 w-10 text-white/70" />
+                            <IconLivro className="h-6 w-6 text-white/70 sm:h-10 sm:w-10" />
                           </div>
                         )}
                       </div>
 
-                      <div className="p-4">
-                        <p className="font-display text-sm font-semibold text-[var(--color-ink)]">
+                      <div className="p-2.5 sm:p-4">
+                        <p className="font-display text-xs font-semibold text-[var(--color-ink)] sm:text-sm">
                           {curso.titulo}
                         </p>
                         {curso.descricao && (
-                          <p className="mt-1 line-clamp-2 text-xs text-[var(--color-ink-soft)]">
+                          <p className="mt-1 line-clamp-2 hidden text-xs text-[var(--color-ink-soft)] sm:block">
                             {curso.descricao}
                           </p>
                         )}
 
-                        <div className="mt-4">
+                        <div className="mt-2.5 sm:mt-4">
                           <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-royal-soft)]">
                             <div
                               className="h-full rounded-full bg-[var(--color-royal)]"
                               style={{ width: `${percentual}%` }}
                             />
                           </div>
-                          <p className="mt-1.5 text-xs text-[var(--color-ink-soft)]">
+                          <p className="mt-1.5 text-[10px] text-[var(--color-ink-soft)] sm:text-xs">
                             {curso.aulasConcluidas} de {curso.totalAulas} aulas ·{" "}
                             {percentual}%
                           </p>
