@@ -2,6 +2,19 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const PdfViewer = dynamic(
+  () => import("./pdf-viewer").then((m) => m.PdfViewer),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="mt-4 flex h-[65vh] items-center justify-center rounded-xl border border-[var(--color-line)] bg-[var(--color-royal-soft)]">
+        <p className="text-sm text-[var(--color-ink-soft)]">Carregando material...</p>
+      </div>
+    ),
+  },
+);
 
 const INTERVALO_ENVIO_SEGUNDOS = 30;
 
@@ -125,11 +138,7 @@ export function LeitorAula({
 
   return (
     <div className="mt-4">
-      <iframe
-        src={`/api/aulas/${aulaId}/arquivo`}
-        title="Material da aula"
-        className="h-[65vh] w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-royal-soft)]"
-      />
+      <PdfViewer aulaId={aulaId} />
 
       <div className="mt-4 flex flex-col gap-3 sm:flex-row">
         <a

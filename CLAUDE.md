@@ -120,7 +120,10 @@ Regras de stack:
 - Na primeira vez que um aluno abre uma aula, o sistema gera uma cópia com
   **marca d'água** (nome, CPF e email dele, mais data) queimada em todas as
   páginas, salva essa cópia e reusa nas próximas vezes. Não gerar a cada acesso.
-- Entrega sempre por **signed URL curta** (10 minutos).
+- Nunca expõe URL permanente do arquivo. Download usa **signed URL curta**
+  (10 minutos); a leitura embutida no leitor de PDF passa pelos bytes direto
+  pela rota autenticada (sem gerar URL nenhuma), pra funcionar de forma
+  confiável no leitor nativo de PDF do iOS Safari.
 - Marca d'água não impede print. Ela impede repasse anônimo, que é o objetivo.
 ---
 ## 6. Versionamento de material
@@ -199,3 +202,13 @@ duas fases estoura o contexto no meio e deixa o código pela metade.
 - Liberar acesso em evento de pagamento pendente
 - Apagar matrícula em reembolso (é revogação, não delete)
 - Mostrar nota parcial enquanto há discursiva pendente
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

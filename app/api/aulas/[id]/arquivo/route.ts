@@ -119,18 +119,43 @@ export async function GET(
 
   const download = new URL(request.url).searchParams.get("download") === "1";
 
-  const { data: signed, error: signError } = await admin.storage
-    .from(MATERIAIS_BUCKET)
-    .createSignedUrl(finalPath, 600, download ? { download: true } : undefined);
+  // Download continua indo por signed URL (o navegador baixa direto do
+  // Storage). Pra leitura embutida, servimos os bytes por essa própria rota
+  // em vez de redirecionar: evita que o leitor de PDF do celular precise
+  // seguir um redirect cross-origin com Range request, que é onde o iOS
+  // Safari falhava em renderizar o conteúdo.
+  if (download) {
+    const { data: signed, error: signError } = await admin.storage
+      .from(MATERIAIS_BUCKET)
+      .createSignedUrl(finalPath, 600, { download: true });
 
-  if (signError || !signed) {
+    if (signError || !signed) {
+      return NextResponse.json(
+        { error: "Não foi possível gerar o link do material." },
+        { status: 500 },
+      );
+    }
+
+    const response = NextResponse.redirect(signed.signedUrl);
+    response.headers.set("Cache-Control", "no-store");
+    return response;
+  }
+
+  const { data: fileBlob, error: fileError } = await admin.storage
+    .from(MATERIAIS_BUCKET)
+    .download(finalPath);
+
+  if (fileError || !fileBlob) {
     return NextResponse.json(
-      { error: "Não foi possível gerar o link do material." },
+      { error: "Não foi possível carregar o material." },
       { status: 500 },
     );
   }
 
-  const response = NextResponse.redirect(signed.signedUrl);
-  response.headers.set("Cache-Control", "no-store");
-  return response;
+  return new NextResponse(await fileBlob.arrayBuffer(), {
+    headers: {
+      "Content-Type": "application/pdf",
+      "Cache-Control": "no-store",
+    },
+  });
 }
